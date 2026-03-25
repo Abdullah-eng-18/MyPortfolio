@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- same fonts, icons, tailwind, aos as homepage -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/e42d2ab83e.js" crossorigin="anonymous"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+    </script>
+    <title>CAD Practice · Abdullah Saif</title>
+    <style>
+        /* ----- your original color palette & animations ----- */
+        .bg-primary { background-color: #14213d; }
+        .bg-accent { background-color: #322EBD; }
+        .bg-secondary { background-color: #7582C1; }
+        .bg-light { background-color: #e5e5e5; }
+        .text-primary { color: #14213d; }
+        .text-accent { color: #29447d; }
+        .text-secondary { color: #7582C1; }
+        .text-light { color: #e5e5e5; }
+        .hover-text-secondary:hover { color: #40455c; }
+
+        .blinking-cursor { animation: blink 1s step-start infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* card hover effect (same as homepage) */
+        .practice-card {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
+        }
+        .practice-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px 0 rgba(41, 68, 125, 0.15);
+        }
+
+        @keyframes slow-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes fast-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .slow-spin { animation: slow-spin 6s linear infinite; }
+        .group:hover .hover-spin {
+            animation: fast-spin 1s linear infinite !important;
+            transform: scale(1.25);
+            color: #021338; 
+        }
+        .no-shadow-on-hover:hover {
+            box-shadow: none !important;
+            transform: scale(1.05) !important; 
+        }
+
+        /* tech tags styling */
+        .tech-tag {
+            transition: all 0.2s ease;
+            background-color: #f0f2f5;
+            color: #14213d;
+        }
+        .tech-tag:hover {
+            background-color: #29447d;
+            color: #e5e5e5;
+            transform: scale(1.05);
+        }
+
+        /* image placeholder style (for practice drawings) */
+        .drawing-preview {
+            background: linear-gradient(145deg, #f5f5f5 0%, #eaeaea 100%);
+            border: 1px dashed #b0b0b0;
+            aspect-ratio: 16 / 10;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #5a5a5a;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body class="font-[Poppins] scroll-smooth antialiased">
+
+    <!-- ========== HEADER (exact same as homepage) ========== -->
+    <header class="fixed z-50 bg-gradient-to-b from-zinc-300 to-white w-full shadow-sm">
+        <nav class="flex justify-between items-center px-4 lg:px-6">
+            <a href="index.html">
+                <h2 class="group no-shadow-on-hover py-4 text-primary font-bold text-xl uppercase hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                    <i class="fas fa-cog text-primary slow-spin hover-spin transition-all duration-300"></i>
+                    Engg. Abdullah Saif
+                </h2>
+            </a>
+            <button id="menu-btn" class="lg:hidden text-primary text-2xl focus:outline-none pr-2">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul id="nav-menu" class="hidden lg:flex flex-col lg:flex-row gap-4 lg:gap-5 p-4 lg:p-0 items-start lg:items-center text-primary font-semibold tracking-wider absolute lg:static top-full left-0 w-full lg:w-auto bg-white lg:bg-transparent shadow-md lg:shadow-none z-40 transition-all duration-300">
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl flex items-center gap-2" href="index.html"><i class="fa-solid fa-house-user"></i> HOME</a></li>
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl flex items-center gap-2" href="skills.html"><i class="fa-solid fa-screwdriver-wrench"></i> SKILLS</a></li>
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl flex items-center gap-2" href="abdullah%20saif%20general.pdf" target="_blank"><i class="fa-solid fa-file"></i> RESUME</a></li>
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl flex items-center gap-2" href="experience.html"><i class="fa-solid fa-person-walking-luggage"></i> EXPERIENCE</a></li>
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl flex items-center gap-2" href="projects.html"><i class="fa-solid fa-gears"></i> PROJECTS</a></li>
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl flex items-center gap-2" href="contact.html"><i class="fa-solid fa-address-book"></i> CONTACT ME</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ========== MAIN: CAD PRACTICE SECTION ========== -->
+    <main class="pt-32 pb-16 px-4 md:px-8 max-w-6xl mx-auto">
+        <!-- title & typing effect -->
+        <div class="mb-12 text-center" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 flex items-center justify-center gap-3 flex-wrap">
+                <i class="fa-solid fa-compass-drafting text-primary"></i> 
+                <span>CAD Practice / Technical Drawings</span>
+            </h2>
+            <div class="text-accent mt-2 h-8 text-lg md:text-xl">
+                <span id="practice-typing"></span><span class="blinking-cursor text-primary">|</span>
+            </div>
+            <p class="text-gray-600 mt-3 max-w-xl mx-auto">Exercises to build precision & dimensioning skills</p>
+        </div>
+
+        <!-- grid: two columns on medium+ screens -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8" data-aos="fade-up" data-aos-delay="100">
+            
+            <!-- ========== CARD 1: Crane Hook ========== -->
+            <div class="practice-card bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col">
+                <video src="cranehook.mp4" alt="Crane Hook Preview" class="w-full rounded-2xl aspect-[16/10] object-cover" controls autoplay></video>
+                <!-- <div class="drawing-preview w-full flex items-center justify-center text-gray-500 text-sm p-4">
+                    <i class="fa-regular fa-image text-3xl mr-2 opacity-50"></i> Crane Hook Preview
+                </div> -->
+                <!-- content -->
+                <div class="p-6 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-2xl font-bold text-primary flex items-center gap-2">
+                            <i class="fa-regular fa-rectangle-ad text-secondary"></i> Crane Hook
+                        </h3>
+                        <span class="bg-zinc-100 text-primary text-xs px-3 py-1 rounded-full font-medium">AutoCAD</span>
+                    </div>
+                    <p class="text-gray-600 mt-3 text-sm leading-relaxed">
+                        Practice drawing focused on orthographic projection, proper dimensioning, and layer management.
+                    </p>
+                    <!-- tech tags (like AutoCAD | 2D Drafting) -->
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="tech-tag px-3 py-1 rounded-full text-xs font-medium">AutoCAD</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-xs font-medium">2D Drafting</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-xs font-medium">Dimensioning</span>
+                    </div>
+                    <!-- button that leads to detailed page -->
+                    <a href="drawing-crane-hook.html" class="mt-5 inline-flex items-center text-primary font-medium gap-2 group/link w-fit">
+                        <span>View Drawing</span> <i class="fa-solid fa-arrow-right text-sm transition-transform group-hover/link:translate-x-1"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ========== CARD 2: Engine Blower ========== -->
+            <div class="practice-card bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col">
+                <video src="engine-blower.mp4" alt="Engine Blower Preview" class="w-full rounded-2xl aspect-[16/10] object-cover" controls autoplay></video>
+                <div class="p-6 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-2xl font-bold text-primary flex items-center gap-2">
+                            <i class="fa-regular fa-snowflake text-secondary"></i> Engine Blower
+                        </h3>
+                        <span class="bg-zinc-100 text-primary text-xs px-3 py-1 rounded-full font-medium">AutoCAD</span>
+                    </div>
+                    <p class="text-gray-600 mt-3 text-sm leading-relaxed">
+                        Multi-view drawing of a blower assembly. Practiced hatching, section views, and tolerance标注.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="tech-tag px-3 py-1 rounded-full text-xs font-medium">AutoCAD</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-xs font-medium">Section Views</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-xs font-medium">Hatching</span>
+                    </div>
+                    <a href="drawing-engine-blower.html" class="mt-5 inline-flex items-center text-primary font-medium gap-2 group/link w-fit">
+                        <span>View Drawing</span> <i class="fa-solid fa-arrow-right text-sm transition-transform group-hover/link:translate-x-1"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ========== CARD 3: Mechanical Part (SolidWorks) ========== -->
+            <div class="practice-card bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col">
+                <div class="drawing-preview w-full flex items-center justify-center text-gray-500 text-sm p-4">
+                    <i class="fa-regular fa-cube text-3xl mr-2 opacity-50"></i> Support Bracket Preview
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-2xl font-bold text-primary flex items-center gap-2">
+                            <i class="fa-regular fa-cube text-secondary"></i> Support Bracket
+                        </h3>
+                        <span class="bg-zinc-100 text-primary text-xs px-3 py-1 rounded-full font-medium">SolidWorks</span>
+                    </div>
+                    <p class="text-gray-600 mt-3 text-sm leading-relaxed">
+                        3D model with extruded boss/cut, fillets, and hole wizard. Explored basic part modeling.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="tech-tag px-3 py-1 rounded-full text-xs font-medium">SolidWorks</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-xs font-medium">3D Modeling</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-xs font-medium">Extrude/Cut</span>
+                    </div>
+                    <a href="drawing-support-bracket.html" class="mt-5 inline-flex items-center text-primary font-medium gap-2 group/link w-fit">
+                        <span>View Model</span> <i class="fa-solid fa-arrow-right text-sm transition-transform group-hover/link:translate-x-1"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ========== CARD 4: Flange Coupling ========== -->
+            <div class="practice-card bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col">
+                <div class="drawing-preview w-full flex items-center justify-center text-gray-500 text-sm p-4">
+                    <i class="fa-regular fa-gear text-3xl mr-2 opacity-50"></i> Flange Coupling Preview
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-2xl font-bold text-primary flex items-center gap-2">
+                            <i class="fa-regular fa-link text-secondary"></i> Flange Coupling
+                        </h3>
+                        <span class="bg-zinc-100 text-primary text-xs px-3 py-1 rounded-full font-medium">AutoCAD</span>
+                    </div>
+                    <p class="text-gray-600 mt-3 text-sm leading-relaxed">
+                        Assembly drawing with orthographic views. Practiced fits, bolt circles, and exploded view notation.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="tech-tag px-3 py-1 rounded-full text-xs font-medium">AutoCAD</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-xs font-medium">Assembly Drawing</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-xs font-medium">Tolerances</span>
+                    </div>
+                    <a href="drawing-flange-coupling.html" class="mt-5 inline-flex items-center text-primary font-medium gap-2 group/link w-fit">
+                        <span>View Drawing</span> <i class="fa-solid fa-arrow-right text-sm transition-transform group-hover/link:translate-x-1"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ========== CARD 5: Piston Head (SolidWorks) ========== -->
+            <div class="practice-card bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col">
+                <div class="drawing-preview w-full flex items-center justify-center text-gray-500 text-sm p-4">
+                    <i class="fa-regular fa-circle text-3xl mr-2 opacity-50"></i> Piston Head Preview
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-2xl font-bold text-primary flex items-center gap-2">
+                            <i class="fa-regular fa-engine text-secondary"></i> Piston Head
+                        </h3>
+                        <span class="bg-zinc-100 text-primary text-xs px-3 py-1 rounded-full font-medium">SolidWorks</span>
+                    </div>
+                    <p class="text-gray-600 mt-3 text-sm leading-relaxed">
+                        Revolved feature, rib tool, and circular patterns. First attempt at a multi-body part.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="tech-tag px-3 py-1 rounded-full text-xs font-medium">SolidWorks</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-xs font-medium">Revolve</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-xs font-medium">Rib & Pattern</span>
+                    </div>
+                    <a href="drawing-piston-head.html" class="mt-5 inline-flex items-center text-primary font-medium gap-2 group/link w-fit">
+                        <span>View Model</span> <i class="fa-solid fa-arrow-right text-sm transition-transform group-hover/link:translate-x-1"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ========== CARD 6: Bench Vise (Assembly) ========== -->
+            <div class="practice-card bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden flex flex-col">
+                <div class="drawing-preview w-full flex items-center justify-center text-gray-500 text-sm p-4">
+                    <i class="fa-regular fa-toolbox text-3xl mr-2 opacity-50"></i> Bench Vise Preview
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-2xl font-bold text-primary flex items-center gap-2">
+                            <i class="fa-regular fa-wrench text-secondary"></i> Bench Vise
+                        </h3>
+                        <span class="bg-zinc-100 text-primary text-xs px-3 py-1 rounded-full font-medium">SolidWorks</span>
+                    </div>
+                    <p class="text-gray-600 mt-3 text-sm leading-relaxed">
+                        Exploded view, bill of materials, and assembly constraints. Good exercise for mechanical joints.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="tech-tag px-3 py-1 rounded-full text-xs font-medium">SolidWorks</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-xs font-medium">Assembly</span>
+                        <span class="tech-tag px-3 py-1 rounded-full text-xs font-medium">Exploded View</span>
+                    </div>
+                    <a href="drawing-bench-vise.html" class="mt-5 inline-flex items-center text-primary font-medium gap-2 group/link w-fit">
+                        <span>View Assembly</span> <i class="fa-solid fa-arrow-right text-sm transition-transform group-hover/link:translate-x-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- note about future projects -->
+        <div class="mt-16 text-center bg-zinc-50 p-8 rounded-3xl max-w-2xl mx-auto" data-aos="fade-up">
+            <i class="fa-regular fa-clock text-4xl text-primary mb-3"></i>
+            <h3 class="text-2xl font-semibold text-primary">practice → real designs</h3>
+            <p class="text-gray-600 mt-2">Currently building fundamentals. Soon I'll replace these with full mechanical systems & Arduino-based projects.</p>
+            <a href="projects.html" class="inline-block mt-5 bg-primary text-white px-6 py-3 rounded-xl hover:bg-[#1e2c5a] transition-all shadow-md hover:shadow-lg">
+                <i class="fa-solid fa-arrow-right mr-2"></i> Explore other work
+            </a>
+        </div>
+    </main>
+
+    <!-- ========== TYPING EFFECT FOR PRACTICE PAGE ========== -->
+    <script>
+        (function() {
+            const practiceLines = [
+                "AutoCAD · SolidWorks · 2D/3D",
+                "orthographic · section · assembly",
+                "learning by doing",
+                "dimensioning & tolerancing",
+                "practice makes permanent"
+            ];
+            let pIndex = 0, pChar = 0, pDeleting = false;
+            const pSpeed = 100, pPause = 1500;
+            const pEl = document.getElementById("practice-typing");
+            if (pEl) {
+                function pType() {
+                    const current = practiceLines[pIndex];
+                    if (pDeleting) {
+                        pChar--;
+                        pEl.textContent = current.substring(0, pChar);
+                        if (pChar === 0) {
+                            pDeleting = false;
+                            pIndex = (pIndex + 1) % practiceLines.length;
+                            setTimeout(pType, 500);
+                        } else {
+                            setTimeout(pType, pSpeed / 2);
+                        }
+                    } else {
+                        pChar++;
+                        pEl.textContent = current.substring(0, pChar);
+                        if (pChar === current.length) {
+                            pDeleting = true;
+                            setTimeout(pType, pPause);
+                        } else {
+                            setTimeout(pType, pSpeed);
+                        }
+                    }
+                }
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', pType);
+                } else {
+                    pType();
+                }
+            }
+        })();
+    </script>
+
+    <!-- mobile menu toggle -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+        if (menuBtn && navMenu) {
+            menuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('hidden');
+            });
+        }
+    </script>
+
+    <!-- AOS init -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: false });
+    </script>
+
+    <!-- hidden utility fix -->
+    <style>
+        .hidden { display: none !important; }
+        @media (min-width: 1024px) { .hidden { display: flex !important; } }
+    </style>
+</body>
+</html>

@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- same fonts, icons, tailwind, aos as other pages -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/e42d2ab83e.js" crossorigin="anonymous"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- your custom color variables & animations (exact same) -->
+    <style>
+        .bg-primary { background-color: #14213d; }
+        .bg-accent { background-color: #322EBD; }
+        .bg-secondary { background-color: #7582C1; }
+        .bg-light { background-color: #e5e5e5; }
+        .text-primary { color: #14213d; }
+        .text-accent { color: #29447d; }
+        .text-secondary { color: #7582C1; }
+        .text-light { color: #e5e5e5; }
+        .hover-text-secondary:hover { color: #40455c; }
+
+        .blinking-cursor { animation: blink 1s step-start infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* card hover same as homepage group effect & projects/experience */
+        .skill-card {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
+        }
+        .skill-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px 0 rgba(41, 68, 125, 0.15);
+        }
+
+        @keyframes slow-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes fast-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .slow-spin {
+            animation: slow-spin 6s linear infinite;
+        }
+        .group:hover .hover-spin {
+            animation: fast-spin 1s linear infinite !important;
+            transform: scale(1.25);
+            color: #021338;
+        }
+
+        .no-shadow-on-hover:hover {
+            box-shadow: none !important;
+            transform: scale(1.05) !important;
+        }
+
+        /* professional skill bar / level indicator (more refined) */
+        .skill-level {
+            height: 8px;
+            background: #e9e9e9;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 0.75rem 0 0.5rem;
+        }
+        .skill-level-fill {
+            height: 100%;
+            border-radius: 20px;
+            background: linear-gradient(90deg, #29447d, #4a6ab3);
+            width: 0%;
+            transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* expertise tags (like project tech tags) */
+        .expertise-tag {
+            transition: all 0.2s ease;
+            background-color: #f0f2f5;
+            color: #14213d;
+        }
+        .expertise-tag:hover {
+            background-color: #29447d;
+            color: #e5e5e5;
+            transform: scale(1.05);
+        }
+
+        /* category header */
+        .skill-category {
+            border-left: 6px solid #7582C1;
+            padding-left: 1rem;
+            margin: 2rem 0 1.5rem;
+        }
+    </style>
+    <title>Skills – Abdullah Saif (Professional)</title>
+</head>
+<body class="font-[Poppins] scroll-smooth">
+
+    <!-- ========== HEADER (exact copy from other pages) ========== -->
+    <header class="fixed z-50 bg-gradient-to-b from-zinc-300 to-white w-full">
+        <nav class="flex justify-between">
+            <a href="index.html">
+                <h2 class="group no-shadow-on-hover p-4 text-primary font-bold text-xl uppercase hover:scale-105 hover:cursor-pointer cursor-default transition-all duration-300 flex items-center gap-2">
+                    <i class="fas fa-cog text-primary slow-spin hover-spin transition-all duration-300"></i>
+                    Engg. Abdullah Saif
+                </h2>
+            </a>
+            <button id="menu-btn" class="lg:hidden text-primary text-2xl focus:outline-none pr-4">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul id="nav-menu" class="hidden lg:flex flex-col lg:flex-row gap-4 justify-end p-4 items-start lg:items-center text-primary font-semibold tracking-wider absolute lg:static top-full left-0 w-full lg:w-auto bg-white lg:bg-transparent shadow-md lg:shadow-none z-40 transition-all duration-300">
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl relative transition-all duration-300 ease-in-out flex items-center gap-2" href="index.html"><i class="fa-solid fa-house-user"></i> HOME</a></li>
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl relative transition-all duration-300 ease-in-out flex items-center gap-2" href="skills.html"><i class="fa-solid fa-screwdriver-wrench"></i> SKILLS</a></li>
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl relative transition-all duration-300 ease-in-out flex items-center gap-2" href="abdullah saif general.pdf" target="_blank"><i class="fa-solid fa-file"></i> RESUME</a></li>
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl relative transition-all duration-300 ease-in-out flex items-center gap-2" href="experience.html"><i class="fa-solid fa-person-walking-luggage"></i> EXPERIENCE</a></li>
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl relative transition-all duration-300 ease-in-out flex items-center gap-2" href="projects.html"><i class="fa-solid fa-gears"></i> PROJECTS</a></li>
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl relative transition-all duration-300 ease-in-out flex items-center gap-2" href="contact.html"><i class="fa-solid fa-address-book"></i> CONTACT ME</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ========== MAIN SKILLS SECTION ========== -->
+    <main class="pt-32 pb-16 px-4 md:px-8 max-w-6xl mx-auto">
+        <!-- title with typing effect (professional tone) -->
+        <div class="mb-8 text-center" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 flex items-center justify-center gap-3 flex-wrap">
+                <i class="fa-solid fa-chart-line text-primary"></i> 
+                <span>Technical Competencies</span>
+            </h2>
+            <div class="text-accent mt-2 h-8 text-lg md:text-xl">
+                <span id="skills-typing"></span><span class="blinking-cursor text-primary">|</span>
+            </div>
+            <p class="text-gray-600 mt-3 max-w-2xl mx-auto">Mechanical · Automation · Software · Design</p>
+        </div>
+
+        <!-- professional skills grid - two columns on medium+ screens -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mt-10" data-aos="fade-up" data-aos-delay="100">
+            
+            <!-- ========== CATEGORY: CAD & DESIGN ========== (span both cols via container, but we put two cards per category) -->
+            <!-- to keep categories, we'll put heading outside grid or use full width. Better: put categories as separate full width then grid inside -->
+        </div>
+
+        <!-- Category 1: CAD & Design Tools -->
+        <div class="skill-category mt-6" data-aos="fade-right">
+            <h3 class="text-2xl font-semibold text-primary flex items-center gap-3"><i class="fa-solid fa-cube text-secondary"></i> CAD & Design</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-8">
+            <!-- AutoCAD -->
+            <div class="skill-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm" data-aos="fade-up" data-aos-delay="50">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-zinc-100 rounded-xl flex items-center justify-center text-2xl text-primary">⚙️</div>
+                        <h4 class="text-xl font-bold text-primary">AutoCAD</h4>
+                    </div>
+                    <span class="bg-zinc-100 text-primary px-3 py-1 rounded-full text-sm font-medium">90%</span>
+                </div>
+                <p class="text-gray-600 text-sm mt-3">2D drafting, floor plans, mechanical parts, layer management.</p>
+                <div class="skill-level mt-2">
+                    <div class="skill-level-fill" data-width="90" style="width: 0%;"></div>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">DWG</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Layouts</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Dynamic blocks</span>
+                </div>
+            </div>
+            <!-- SolidWorks -->
+            <div class="skill-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm" data-aos="fade-up" data-aos-delay="100">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-zinc-100 rounded-xl flex items-center justify-center text-2xl text-primary">🧩</div>
+                        <h4 class="text-xl font-bold text-primary">SolidWorks</h4>
+                    </div>
+                    <span class="bg-zinc-100 text-primary px-3 py-1 rounded-full text-sm font-medium">75%</span>
+                </div>
+                <p class="text-gray-600 text-sm mt-3">Part modelling, assemblies, basic simulations, drawings.</p>
+                <div class="skill-level mt-2">
+                    <div class="skill-level-fill" data-width="75" style="width: 0%;"></div>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Sheet metal</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Motion study</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">eDrawings</span>
+                </div>
+            </div>
+            <!-- Fusion 360 (added for breadth) -->
+            <div class="skill-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm" data-aos="fade-up" data-aos-delay="150">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-zinc-100 rounded-xl flex items-center justify-center text-2xl text-primary">🔷</div>
+                        <h4 class="text-xl font-bold text-primary">Fusion 360</h4>
+                    </div>
+                    <span class="bg-zinc-100 text-primary px-3 py-1 rounded-full text-sm font-medium">60%</span>
+                </div>
+                <p class="text-gray-600 text-sm mt-3">Parametric design, rendering, generative design basics.</p>
+                <div class="skill-level mt-2">
+                    <div class="skill-level-fill" data-width="60" style="width: 0%;"></div>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">CAM</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Render</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Simulation</span>
+                </div>
+            </div>
+            <!-- CATIA (optional, but shows range) -->
+            <div class="skill-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm" data-aos="fade-up" data-aos-delay="200">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-zinc-100 rounded-xl flex items-center justify-center text-2xl text-primary">✈️</div>
+                        <h4 class="text-xl font-bold text-primary">CATIA (basics)</h4>
+                    </div>
+                    <span class="bg-zinc-100 text-primary px-3 py-1 rounded-full text-sm font-medium">40%</span>
+                </div>
+                <p class="text-gray-600 text-sm mt-3">Sketcher, part design, assembly fundamentals.</p>
+                <div class="skill-level mt-2">
+                    <div class="skill-level-fill" data-width="40" style="width: 0%;"></div>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">GSD</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Assembly</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category 2: Simulation & Analysis (MATLAB, ROS2, ANSYS) -->
+        <div class="skill-category" data-aos="fade-right">
+            <h3 class="text-2xl font-semibold text-primary flex items-center gap-3"><i class="fa-solid fa-chart-simple text-secondary"></i> Simulation & Control</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-8">
+            <!-- MATLAB (requested) -->
+            <div class="skill-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm" data-aos="fade-up">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-zinc-100 rounded-xl flex items-center justify-center text-2xl text-primary">📊</div>
+                        <h4 class="text-xl font-bold text-primary">MATLAB</h4>
+                    </div>
+                    <span class="bg-zinc-100 text-primary px-3 py-1 rounded-full text-sm font-medium">70%</span>
+                </div>
+                <p class="text-gray-600 text-sm mt-3">Data analysis, plotting, Simulink basics, control systems.</p>
+                <div class="skill-level mt-2">
+                    <div class="skill-level-fill" data-width="70" style="width: 0%;"></div>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Simulink</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Curve fitting</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Signal proc</span>
+                </div>
+            </div>
+            <!-- ROS2 (requested) -->
+            <div class="skill-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm" data-aos="fade-up" data-aos-delay="50">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-zinc-100 rounded-xl flex items-center justify-center text-2xl text-primary">🤖</div>
+                        <h4 class="text-xl font-bold text-primary">ROS2 (Humble)</h4>
+                    </div>
+                    <span class="bg-zinc-100 text-primary px-3 py-1 rounded-full text-sm font-medium">55%</span>
+                </div>
+                <p class="text-gray-600 text-sm mt-3">Nodes, topics, services, launch files, basic simulation with Gazebo.</p>
+                <div class="skill-level mt-2">
+                    <div class="skill-level-fill" data-width="55" style="width: 0%;"></div>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">rclpy</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Nav2</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">TurtleBot3</span>
+                </div>
+            </div>
+            <!-- ANSYS -->
+            <div class="skill-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm" data-aos="fade-up" data-aos-delay="100">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-zinc-100 rounded-xl flex items-center justify-center text-2xl text-primary">🔥</div>
+                        <h4 class="text-xl font-bold text-primary">ANSYS Workbench</h4>
+                    </div>
+                    <span class="bg-zinc-100 text-primary px-3 py-1 rounded-full text-sm font-medium">50%</span>
+                </div>
+                <p class="text-gray-600 text-sm mt-3">Static structural, modal analysis, basic thermal simulations.</p>
+                <div class="skill-level mt-2">
+                    <div class="skill-level-fill" data-width="50" style="width: 0%;"></div>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">FEA</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Meshing</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Static structural</span>
+                </div>
+            </div>
+            <!-- Python for engineering (already had, but elevate) -->
+            <div class="skill-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm" data-aos="fade-up" data-aos-delay="150">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-zinc-100 rounded-xl flex items-center justify-center text-2xl text-primary">🐍</div>
+                        <h4 class="text-xl font-bold text-primary">Python (Eng. apps)</h4>
+                    </div>
+                    <span class="bg-zinc-100 text-primary px-3 py-1 rounded-full text-sm font-medium">75%</span>
+                </div>
+                <p class="text-gray-600 text-sm mt-3">NumPy, Matplotlib, data processing, automation, Jupyter.</p>
+                <div class="skill-level mt-2">
+                    <div class="skill-level-fill" data-width="75" style="width: 0%;"></div>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Pandas</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">SciPy</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">OpenCV</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category 3: Embedded & IoT (Arduino, ESP32, etc) -->
+        <div class="skill-category" data-aos="fade-right">
+            <h3 class="text-2xl font-semibold text-primary flex items-center gap-3"><i class="fa-solid fa-microchip text-secondary"></i> Embedded & IoT</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-8">
+            <!-- Arduino -->
+            <div class="skill-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm" data-aos="fade-up">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-zinc-100 rounded-xl flex items-center justify-center text-2xl text-primary">🔌</div>
+                        <h4 class="text-xl font-bold text-primary">Arduino</h4>
+                    </div>
+                    <span class="bg-zinc-100 text-primary px-3 py-1 rounded-full text-sm font-medium">80%</span>
+                </div>
+                <p class="text-gray-600 text-sm mt-3">Sensors, actuators, PWM, I2C/SPI, standalone projects.</p>
+                <div class="skill-level mt-2">
+                    <div class="skill-level-fill" data-width="80" style="width: 0%;"></div>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">C++</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Sensor fusion</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">LCD/OLED</span>
+                </div>
+            </div>
+            <!-- ESP32 / IoT -->
+            <div class="skill-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm" data-aos="fade-up" data-aos-delay="50">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-zinc-100 rounded-xl flex items-center justify-center text-2xl text-primary">📶</div>
+                        <h4 class="text-xl font-bold text-primary">ESP32 & IoT</h4>
+                    </div>
+                    <span class="bg-zinc-100 text-primary px-3 py-1 rounded-full text-sm font-medium">65%</span>
+                </div>
+                <p class="text-gray-600 text-sm mt-3">WiFi, BLE, MQTT, Blynk, ThingSpeak, deep sleep.</p>
+                <div class="skill-level mt-2">
+                    <div class="skill-level-fill" data-width="65" style="width: 0%;"></div>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">MQTT</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">HTTP/GET</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Bluetooth</span>
+                </div>
+            </div>
+            <!-- Raspberry Pi (optional) -->
+            <div class="skill-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm" data-aos="fade-up" data-aos-delay="100">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-zinc-100 rounded-xl flex items-center justify-center text-2xl text-primary">🍓</div>
+                        <h4 class="text-xl font-bold text-primary">Raspberry Pi</h4>
+                    </div>
+                    <span class="bg-zinc-100 text-primary px-3 py-1 rounded-full text-sm font-medium">50%</span>
+                </div>
+                <p class="text-gray-600 text-sm mt-3">GPIO, camera module, basic Linux, Flask server.</p>
+                <div class="skill-level mt-2">
+                    <div class="skill-level-fill" data-width="50" style="width: 0%;"></div>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Python</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Linux</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Flask</span>
+                </div>
+            </div>
+            <!-- PLC basics (adds industrial) -->
+            <div class="skill-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm" data-aos="fade-up" data-aos-delay="150">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-zinc-100 rounded-xl flex items-center justify-center text-2xl text-primary">🏭</div>
+                        <h4 class="text-xl font-bold text-primary">PLC (Ladder logic)</h4>
+                    </div>
+                    <span class="bg-zinc-100 text-primary px-3 py-1 rounded-full text-sm font-medium">40%</span>
+                </div>
+                <p class="text-gray-600 text-sm mt-3">Basic programming, simulation, industrial automation intro.</p>
+                <div class="skill-level mt-2">
+                    <div class="skill-level-fill" data-width="40" style="width: 0%;"></div>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Ladder</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">CODESYS</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category 4: Programming & Web (frontend, tools) -->
+        <div class="skill-category" data-aos="fade-right">
+            <h3 class="text-2xl font-semibold text-primary flex items-center gap-3"><i class="fa-solid fa-code text-secondary"></i> Development & Tools</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-8">
+            <!-- HTML/CSS -->
+            <div class="skill-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm" data-aos="fade-up">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-zinc-100 rounded-xl flex items-center justify-center text-2xl text-primary">🌐</div>
+                        <h4 class="text-xl font-bold text-primary">HTML5 & CSS3</h4>
+                    </div>
+                    <span class="bg-zinc-100 text-primary px-3 py-1 rounded-full text-sm font-medium">90%</span>
+                </div>
+                <p class="text-gray-600 text-sm mt-3">Responsive design, flex/grid, animations, Tailwind.</p>
+                <div class="skill-level mt-2">
+                    <div class="skill-level-fill" data-width="90" style="width: 0%;"></div>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Tailwind</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Bootstrap</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Flex/Grid</span>
+                </div>
+            </div>
+            <!-- JavaScript basics -->
+            <div class="skill-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm" data-aos="fade-up" data-aos-delay="50">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-zinc-100 rounded-xl flex items-center justify-center text-2xl text-primary">📜</div>
+                        <h4 class="text-xl font-bold text-primary">JavaScript (ES6)</h4>
+                    </div>
+                    <span class="bg-zinc-100 text-primary px-3 py-1 rounded-full text-sm font-medium">70%</span>
+                </div>
+                <p class="text-gray-600 text-sm mt-3">DOM manipulation, async, fetch, basic React.</p>
+                <div class="skill-level mt-2">
+                    <div class="skill-level-fill" data-width="70" style="width: 0%;"></div>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">React</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Node.js</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">npm</span>
+                </div>
+            </div>
+            <!-- Git/GitHub -->
+            <div class="skill-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm" data-aos="fade-up" data-aos-delay="100">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-zinc-100 rounded-xl flex items-center justify-center text-2xl text-primary">🐙</div>
+                        <h4 class="text-xl font-bold text-primary">Git & GitHub</h4>
+                    </div>
+                    <span class="bg-zinc-100 text-primary px-3 py-1 rounded-full text-sm font-medium">80%</span>
+                </div>
+                <p class="text-gray-600 text-sm mt-3">Version control, branching, collaboration, basic CI.</p>
+                <div class="skill-level mt-2">
+                    <div class="skill-level-fill" data-width="80" style="width: 0%;"></div>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Git flow</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Actions</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">CLI</span>
+                </div>
+            </div>
+            <!-- Linux basics -->
+            <div class="skill-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm" data-aos="fade-up" data-aos-delay="150">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-zinc-100 rounded-xl flex items-center justify-center text-2xl text-primary">🐧</div>
+                        <h4 class="text-xl font-bold text-primary">Linux / Bash</h4>
+                    </div>
+                    <span class="bg-zinc-100 text-primary px-3 py-1 rounded-full text-sm font-medium">65%</span>
+                </div>
+                <p class="text-gray-600 text-sm mt-3">Command line, shell scripting, Ubuntu, permissions.</p>
+                <div class="skill-level mt-2">
+                    <div class="skill-level-fill" data-width="65" style="width: 0%;"></div>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">Bash</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">SSH</span>
+                    <span class="expertise-tag px-3 py-1 rounded-full text-xs">tmux</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to action (like other pages) -->
+        <div class="mt-16 text-center bg-zinc-50 p-8 rounded-3xl max-w-2xl mx-auto" data-aos="fade-up">
+            <i class="fa-solid fa-arrow-up-right-dots text-3xl text-primary mb-3"></i>
+            <h3 class="text-2xl font-semibold text-primary">always expanding</h3>
+            <p class="text-gray-600 mt-2">Currently deepening ROS2 and MATLAB skills — open to opportunities where I can apply these.</p>
+            <a href="projects.html" class="inline-block mt-5 bg-primary text-white px-6 py-3 rounded-xl hover:bg-[#1e2c5a] transition-all duration-300 shadow-md hover:shadow-lg">
+                <i class="fa-solid fa-arrow-right mr-2"></i> See projects using these skills
+            </a>
+        </div>
+    </main>
+
+    <!-- ========== TYPING EFFECT FOR SKILLS PAGE ========== -->
+    <script>
+        (function() {
+            const skillTaglines = [
+                "CAD · simulation · embedded · control",
+                "MATLAB · ROS2 · ANSYS · Python",
+                "mechanical & software engineering",
+                "tools for modern engineering",
+                "industry-relevant competencies"
+            ];
+
+            let skillIndex = 0;
+            let skillCharIndex = 0;
+            let skillDeleting = false;
+            const skillSpeed = 100;
+            const skillPause = 1500;
+
+            const skillElement = document.getElementById("skills-typing");
+            if (skillElement) {
+                function skillTypeEffect() {
+                    const current = skillTaglines[skillIndex];
+                    if (skillDeleting) {
+                        skillCharIndex--;
+                        skillElement.textContent = current.substring(0, skillCharIndex);
+                        if (skillCharIndex === 0) {
+                            skillDeleting = false;
+                            skillIndex = (skillIndex + 1) % skillTaglines.length;
+                            setTimeout(skillTypeEffect, 500);
+                        } else {
+                            setTimeout(skillTypeEffect, skillSpeed / 2);
+                        }
+                    } else {
+                        skillCharIndex++;
+                        skillElement.textContent = current.substring(0, skillCharIndex);
+                        if (skillCharIndex === current.length) {
+                            skillDeleting = true;
+                            setTimeout(skillTypeEffect, skillPause);
+                        } else {
+                            setTimeout(skillTypeEffect, skillSpeed);
+                        }
+                    }
+                }
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', skillTypeEffect);
+                } else {
+                    skillTypeEffect();
+                }
+            }
+        })();
+    </script>
+
+    <!-- skill bar animation on scroll (similar to homepage but cleaner) -->
+    <script>
+        function animateSkillBars() {
+            document.querySelectorAll('.skill-level-fill').forEach(bar => {
+                const rect = bar.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight - 50 && rect.bottom > 0;
+                if (isVisible) {
+                    const width = bar.getAttribute('data-width');
+                    if (width && bar.style.width !== width + '%') {
+                        bar.style.width = width + '%';
+                    }
+                } else {
+                    // optionally reset when out of view? we keep them filled once animated.
+                    // but for better UX we set them once, no reset.
+                }
+            });
+        }
+        window.addEventListener('scroll', animateSkillBars);
+        window.addEventListener('DOMContentLoaded', () => {
+            // small delay to ensure layout
+            setTimeout(animateSkillBars, 200);
+        });
+    </script>
+
+    <!-- mobile menu toggle (same as homepage) -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+        if (menuBtn && navMenu) {
+            menuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('hidden');
+            });
+        }
+    </script>
+
+    <!-- AOS initialization -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: false,
+        });
+    </script>
+
+    <!-- scroll restoration (from homepage) -->
+    <script>
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+    </script>
+</body>
+</html>

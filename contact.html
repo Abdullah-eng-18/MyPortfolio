@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- same fonts, icons, tailwind, aos as other pages -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/e42d2ab83e.js" crossorigin="anonymous"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- your custom color variables & animations (exact same) -->
+    <style>
+        .bg-primary { background-color: #14213d; }
+        .bg-accent { background-color: #322EBD; }
+        .bg-secondary { background-color: #7582C1; }
+        .bg-light { background-color: #e5e5e5; }
+        .text-primary { color: #14213d; }
+        .text-accent { color: #29447d; }
+        .text-secondary { color: #7582C1; }
+        .text-light { color: #e5e5e5; }
+        .hover-text-secondary:hover { color: #40455c; }
+
+        .blinking-cursor { animation: blink 1s step-start infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* card hover same as homepage group effect */
+        .contact-card {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
+        }
+        .contact-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px 0 rgba(41, 68, 125, 0.15);
+        }
+
+        @keyframes slow-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes fast-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .slow-spin {
+            animation: slow-spin 6s linear infinite;
+        }
+        .group:hover .hover-spin {
+            animation: fast-spin 1s linear infinite !important;
+            transform: scale(1.25);
+            color: #021338;
+        }
+
+        .no-shadow-on-hover:hover {
+            box-shadow: none !important;
+            transform: scale(1.05) !important;
+        }
+
+        /* form input styling */
+        .form-input {
+            transition: border 0.2s, box-shadow 0.2s;
+        }
+        .form-input:focus {
+            border-color: #29447d;
+            box-shadow: 0 0 0 3px rgba(41, 68, 125, 0.1);
+            outline: none;
+        }
+
+        /* submit button animation */
+        .submit-btn {
+            transition: all 0.3s ease;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(20, 33, 61, 0.3);
+        }
+
+        /* social icon hover */
+        .social-icon {
+            transition: all 0.2s ease;
+        }
+        .social-icon:hover {
+            transform: scale(1.15);
+            color: #29447d;
+        }
+    </style>
+    <title>Contact Me – Abdullah Saif</title>
+</head>
+<body class="font-[Poppins] scroll-smooth">
+
+    <!-- ========== HEADER (exact copy from other pages) ========== -->
+    <header class="fixed z-50 bg-gradient-to-b from-zinc-300 to-white w-full">
+        <nav class="flex justify-between">
+            <a href="index.html">
+                <h2 class="group no-shadow-on-hover p-4 text-primary font-bold text-xl uppercase hover:scale-105 hover:cursor-pointer cursor-default transition-all duration-300 flex items-center gap-2">
+                    <i class="fas fa-cog text-primary slow-spin hover-spin transition-all duration-300"></i>
+                    Engg. Abdullah Saif
+                </h2>
+            </a>
+            <button id="menu-btn" class="lg:hidden text-primary text-2xl focus:outline-none pr-4">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul id="nav-menu" class="hidden lg:flex flex-col lg:flex-row gap-4 justify-end p-4 items-start lg:items-center text-primary font-semibold tracking-wider absolute lg:static top-full left-0 w-full lg:w-auto bg-white lg:bg-transparent shadow-md lg:shadow-none z-40 transition-all duration-300">
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl relative transition-all duration-300 ease-in-out flex items-center gap-2" href="index.html"><i class="fa-solid fa-house-user"></i> HOME</a></li>
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl relative transition-all duration-300 ease-in-out flex items-center gap-2" href="skills.html"><i class="fa-solid fa-screwdriver-wrench"></i> SKILLS</a></li>
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl relative transition-all duration-300 ease-in-out flex items-center gap-2" href="abdullah saif general.pdf" target="_blank"><i class="fa-solid fa-file"></i> RESUME</a></li>
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl relative transition-all duration-300 ease-in-out flex items-center gap-2" href="experience.html"><i class="fa-solid fa-person-walking-luggage"></i> EXPERIENCE</a></li>
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl relative transition-all duration-300 ease-in-out flex items-center gap-2" href="projects.html"><i class="fa-solid fa-gears"></i> PROJECTS</a></li>
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl relative transition-all duration-300 ease-in-out flex items-center gap-2" href="contact.html"><i class="fa-solid fa-address-book"></i> CONTACT ME</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ========== MAIN CONTACT SECTION ========== -->
+    <main class="pt-32 pb-16 px-4 md:px-8 max-w-5xl mx-auto">
+        <!-- title with typing effect -->
+        <div class="mb-12 text-center" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 flex items-center justify-center gap-3 flex-wrap">
+                <i class="fa-solid fa-paper-plane text-primary"></i> 
+                <span>Get In Touch</span>
+            </h2>
+            <div class="text-accent mt-2 h-8 text-lg md:text-xl">
+                <span id="contact-typing"></span><span class="blinking-cursor text-primary">|</span>
+            </div>
+            <p class="text-gray-600 mt-3 max-w-xl mx-auto">I'll respond as soon as possible — usually within 24h</p>
+        </div>
+
+        <!-- Two column layout: left contact info, right form -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12" data-aos="fade-up" data-aos-delay="100">
+            
+            <!-- LEFT: Contact information & social -->
+            <div class="space-y-6">
+                <!-- intro card -->
+                <div class="contact-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+                    <h3 class="text-2xl font-bold text-primary flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-hand-wave text-secondary"></i> 
+                        Let's connect
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        I'm currently open to freelance projects, internships, and full-time opportunities in mechanical engineering, automation, and frontend development. Whether you have a question or just want to say hi, I'll do my best to get back to you!
+                    </p>
+                </div>
+
+                <!-- email card with YOUR EMAIL (replace with your actual) -->
+                <div class="contact-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+                    <h4 class="text-lg font-semibold text-primary flex items-center gap-2 mb-3">
+                        <i class="fa-regular fa-envelope text-secondary"></i> 
+                        Email directly
+                    </h4>
+                    <a href="mailto:abdullahsaif0306@gmail.com" class="text-xl md:text-2xl text-primary font-medium break-all hover:underline flex items-center gap-2">
+                        <i class="fa-regular fa-paper-plane text-secondary text-lg"></i>
+                        abdullahsaif0306@gmail.com
+                    </a>
+                    <p class="text-sm text-gray-500 mt-3 flex items-center gap-2">
+                        <i class="fa-regular fa-clock"></i> 
+                        Typically replies within 24 hours
+                    </p>
+                </div>
+
+                <!-- location & response time card -->
+                <div class="contact-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 bg-zinc-100 rounded-xl flex items-center justify-center text-2xl text-primary">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">Based in</p>
+                            <p class="text-lg font-medium text-primary">Lahore, Pakistan</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-zinc-100 rounded-xl flex items-center justify-center text-2xl text-primary">
+                            <i class="fa-solid fa-globe"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-500">Timezone</p>
+                            <p class="text-lg font-medium text-primary">PKT (UTC+5)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- social links -->
+                <div class="contact-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+                    <h4 class="text-lg font-semibold text-primary mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-share-nodes text-secondary"></i> 
+                        Find me online
+                    </h4>
+                    <div class="flex flex-wrap gap-5 justify-start">
+                        <a href="#" class="social-icon text-3xl text-primary"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="social-icon text-3xl text-primary"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="#" class="social-icon text-3xl text-primary"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" class="social-icon text-3xl text-primary"><i class="fa-brands fa-upwork"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: Contact Form (sends to your email) -->
+            <div class="contact-card bg-white rounded-2xl p-6 md:p-8 border border-gray-200 shadow-sm" data-aos="fade-up" data-aos-delay="150">
+                <h3 class="text-2xl font-bold text-primary mb-6 flex items-center gap-2">
+                    <i class="fa-regular fa-message text-secondary"></i> 
+                    Send a message
+                </h3>
+
+                <!-- 
+                    ==============================================
+                    IMPORTANT: Replace YOUR_EMAIL_HERE with your actual email
+                    This form uses Formspree – a free service that forwards emails.
+                    After replacing, the form will send messages to your inbox.
+                    ==============================================
+                -->
+                <form action="https://formspree.io/f/xnjgbgrj" method="POST" class="space-y-5">
+                    <!-- name field -->
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your name</label>
+                        <input type="text" id="name" name="name" required
+                            class="form-input w-full px-4 py-3 border border-gray-300 rounded-xl bg-white text-gray-800 placeholder-gray-400 focus:border-primary focus:ring-1 focus:ring-primary transition"
+                            placeholder="e.g., Ahmed">
+                    </div>
+
+                    <!-- email field -->
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email address</label>
+                        <input type="email" id="email" name="email" required
+                            class="form-input w-full px-4 py-3 border border-gray-300 rounded-xl bg-white text-gray-800 placeholder-gray-400 focus:border-primary focus:ring-1 focus:ring-primary transition"
+                            placeholder="you@example.com">
+                    </div>
+
+                    <!-- subject field -->
+                    <div>
+                        <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+                        <input type="text" id="subject" name="subject" required
+                            class="form-input w-full px-4 py-3 border border-gray-300 rounded-xl bg-white text-gray-800 placeholder-gray-400 focus:border-primary focus:ring-1 focus:ring-primary transition"
+                            placeholder="What's this about?">
+                    </div>
+
+                    <!-- message field -->
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                        <textarea id="message" name="message" rows="5" required
+                            class="form-input w-full px-4 py-3 border border-gray-300 rounded-xl bg-white text-gray-800 placeholder-gray-400 focus:border-primary focus:ring-1 focus:ring-primary transition resize-none"
+                            placeholder="Hi Abdullah, I'd like to talk about..."></textarea>
+                    </div>
+
+                    <!-- hidden field to ensure email subject (optional but helpful) -->
+                    <input type="hidden" name="_subject" value="New portfolio message from contact page">
+
+                    <!-- submit button -->
+                    <button type="submit"
+                        class="submit-btn w-full bg-primary text-white font-semibold py-4 px-6 rounded-xl flex items-center justify-center gap-3 text-lg shadow-md hover:bg-[#1e2c5a] transition-all duration-300">
+                        <i class="fa-regular fa-paper-plane"></i>
+                        Send Message
+                    </button>
+
+                    <!-- note about Formspree (will be invisible after setup) -->
+                    <p class="text-xs text-gray-400 text-center mt-4">
+                        <i class="fa-regular fa-circle-check"></i> 
+                        Messages are forwarded securely to my inbox.
+                    </p>
+                </form>
+
+                <!-- 
+                    ==============================================
+                    FORMSPREE SETUP INSTRUCTIONS (remove after reading):
+                    1. Go to https://formspree.io/ and sign up (free)
+                    2. Create a new form, get your form ID (e.g., xyzabc)
+                    3. Replace "your_form_id" in the action URL above
+                    4. Example: action="https://formspree.io/f/mjvqpkdr"
+                    5. Test the form – it will send emails to the address you used on Formspree
+                    ==============================================
+                -->
+            </div>
+        </div>
+
+        <!-- Additional call to action / map (optional) -->
+        <div class="mt-16 text-center bg-zinc-50 p-8 rounded-3xl max-w-2xl mx-auto" data-aos="fade-up">
+            <i class="fa-regular fa-comment-dots text-3xl text-primary mb-3"></i>
+            <h3 class="text-2xl font-semibold text-primary">prefer a quick call?</h3>
+            <p class="text-gray-600 mt-2">Drop your number and availability, and I'll reach out.</p>
+            <a href="mailto:abdullahsaif0306@gmail.com?subject=Let's%20schedule%20a%20call&body=Hi%20Abdullah%2C%20I'd%20like%20to%20schedule%20a%20quick%20call.%20Here's%20my%20number%20and%20availability..." class="inline-block mt-5 bg-primary text-white px-6 py-3 rounded-xl hover:bg-[#1e2c5a] transition-all duration-300 shadow-md hover:shadow-lg">
+                <i class="fa-solid fa-phone mr-2"></i> Request a call
+            </a>
+        </div>
+    </main>
+
+    <!-- ========== TYPING EFFECT FOR CONTACT PAGE ========== -->
+    <script>
+        (function() {
+            const contactTaglines = [
+                "available for work · freelance · collaborations",
+                "abdullah.saif@engineer.com",
+                "let's build something together",
+                "mechanical · automation · web",
+                "Lahore, Pakistan — open to remote"
+            ];
+
+            let contactIndex = 0;
+            let contactCharIndex = 0;
+            let contactDeleting = false;
+            const contactSpeed = 100;
+            const contactPause = 1500;
+
+            const contactElement = document.getElementById("contact-typing");
+            if (contactElement) {
+                function contactTypeEffect() {
+                    const current = contactTaglines[contactIndex];
+                    if (contactDeleting) {
+                        contactCharIndex--;
+                        contactElement.textContent = current.substring(0, contactCharIndex);
+                        if (contactCharIndex === 0) {
+                            contactDeleting = false;
+                            contactIndex = (contactIndex + 1) % contactTaglines.length;
+                            setTimeout(contactTypeEffect, 500);
+                        } else {
+                            setTimeout(contactTypeEffect, contactSpeed / 2);
+                        }
+                    } else {
+                        contactCharIndex++;
+                        contactElement.textContent = current.substring(0, contactCharIndex);
+                        if (contactCharIndex === current.length) {
+                            contactDeleting = true;
+                            setTimeout(contactTypeEffect, contactPause);
+                        } else {
+                            setTimeout(contactTypeEffect, contactSpeed);
+                        }
+                    }
+                }
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', contactTypeEffect);
+                } else {
+                    contactTypeEffect();
+                }
+            }
+        })();
+    </script>
+
+    <!-- mobile menu toggle (same as homepage) -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+        if (menuBtn && navMenu) {
+            menuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('hidden');
+            });
+        }
+    </script>
+
+    <!-- AOS initialization -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: false,
+        });
+    </script>
+
+    <!-- scroll restoration (from homepage) -->
+    <script>
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+    </script>
+
+    <!-- optional: smooth form placeholder behavior -->
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/e42d2ab83e.js" crossorigin="anonymous"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+    </script>
+    <title>Abdullah Saif · Mechanical Engineer</title>
+    <style>
+        /* ----- your original color palette & key animations (exactly as before) ----- */
+        .bg-primary { background-color: #14213d; }
+        .bg-accent { background-color: #322EBD; }
+        .bg-secondary { background-color: #7582C1; }
+        .bg-light { background-color: #e5e5e5; }
+        .text-primary { color: #14213d; }
+        .text-accent { color: #29447d; }
+        .text-secondary { color: #7582C1; }
+        .text-light { color: #e5e5e5; }
+        .hover-text-secondary:hover { color: #40455c; }
+
+        .blinking-cursor {
+            animation: blink 1s step-start infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .group {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .group:hover {
+            transform: scale(1.04);
+            box-shadow: 0 8px 24px 0 rgba(41, 68, 125, 0.15);
+        }
+
+        @keyframes slow-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes fast-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .slow-spin {
+            animation: slow-spin 6s linear infinite;
+        }
+        .group:hover .hover-spin {
+            animation: fast-spin 1s linear infinite !important;
+            transform: scale(1.25);
+            color: #021338; 
+        }
+        .no-shadow-on-hover:hover {
+            box-shadow: none !important;
+            transform: scale(1.05) !important; 
+        }
+
+        /* responsive image fix */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body class="font-[Poppins] scroll-smooth antialiased">
+
+    <!-- ========== HEADER (exact same, fully responsive) ========== -->
+    <header class="fixed z-50 bg-gradient-to-b from-zinc-300 to-white w-full shadow-sm">
+        <nav class="flex justify-between items-center px-4 lg:px-6">
+            <a href="index.html">
+                <h2 class="group no-shadow-on-hover py-4 text-primary font-bold text-xl uppercase hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                    <i class="fas fa-cog text-primary slow-spin hover-spin transition-all duration-300"></i>
+                    Engg. Abdullah Saif
+                </h2>
+            </a>
+            <button id="menu-btn" class="lg:hidden text-primary text-2xl focus:outline-none pr-2">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul id="nav-menu" class="hidden lg:flex flex-col lg:flex-row gap-4 lg:gap-5 p-4 lg:p-0 items-start lg:items-center text-primary font-semibold tracking-wider absolute lg:static top-full left-0 w-full lg:w-auto bg-white lg:bg-transparent shadow-md lg:shadow-none z-40 transition-all duration-300">
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl flex items-center gap-2" href="index.html"><i class="fa-solid fa-house-user"></i> HOME</a></li>
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl flex items-center gap-2" href="skills.html"><i class="fa-solid fa-screwdriver-wrench"></i> SKILLS</a></li>
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl flex items-center gap-2" href="abdullah%20saif%20general.pdf" target="_blank"><i class="fa-solid fa-file"></i> RESUME</a></li>
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl flex items-center gap-2" href="experience.html"><i class="fa-solid fa-person-walking-luggage"></i> EXPERIENCE</a></li>
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl flex items-center gap-2" href="projects.html"><i class="fa-solid fa-gears"></i> PROJECTS</a></li>
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl flex items-center gap-2" href="contact.html"><i class="fa-solid fa-address-book"></i> CONTACT ME</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ========== HERO SECTION (only hero – skills & experience removed) ========== -->
+    <section class="relative top-[10vh] md:top-[12vh] min-h-screen flex items-center justify-center px-4 py-8 md:py-12">
+        <div class="hero grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center max-w-6xl mx-auto" data-aos="fade-up">
+            <!-- content side -->
+            <div class="content order-2 md:order-1" data-aos="fade-right" data-aos-delay="100">
+                <div class="max-w-xl">
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">
+                        Hi, I'm
+                        <span class="block sm:inline-block bg-gradient-to-r from-indigo-900 via-[#29469d] to-[#14219d] bg-clip-text text-transparent uppercase text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-2 sm:mt-0">
+                            Abdullah Saif
+                        </span>
+                    </h2>
+                    <div class="text-lg sm:text-xl text-accent h-10 font-medium mb-4">
+                        <span id="typing-text"></span><span class="blinking-cursor text-primary">|</span>
+                    </div>
+                    <p class="text-base sm:text-lg text-gray-700 mb-4 leading-relaxed">
+                        Mechanical Engineer with a creative drive for smart systems, automation, and digital design.
+                        I combine core engineering with modern tools like Arduino, AutoCAD, SOLIDWORKS, and Frontend
+                        development to bring ideas to life.
+                    </p>
+                    <p class="text-base sm:text-lg text-gray-700 mb-6 leading-relaxed">
+                        I enjoy building things that work — whether it's mechanical, digital, or both.
+                    </p>
+                    <div class="buttons flex flex-col sm:flex-row gap-4">
+                        <a href="projects.html">
+                            <button class="w-full sm:w-auto px-6 py-3 bg-zinc-300 text-primary rounded-xl font-medium hover:bg-[#29466d] hover:text-zinc-300 hover:shadow-[0_0_10px_#14217d] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+                                View my Projects <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </a>
+                        <a href="abdullah%20saif%20general.pdf" download>
+                            <button class="w-full sm:w-auto px-6 py-3 bg-zinc-300 text-primary rounded-xl font-medium hover:bg-[#29466d] hover:text-zinc-300 hover:shadow-[0_0_10px_#14217d] hover:scale-105 transition-all duration-300">
+                                Download Resume
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- image side -->
+            <div class="pic order-1 md:order-2 flex justify-center" data-aos="fade-left" data-aos-delay="200">
+                <img class="w-2/3 sm:w-1/2 md:w-4/5 lg:w-3/4 max-w-sm rounded-full object-cover object-top aspect-square ring-2 ring-gray-300 shadow-[0_0_20px_#14213d] hover:shadow-[0_0_30px_#14213d] hover:scale-105 transition-all duration-300"
+                    src="my_pic.jpg" alt="Abdullah Saif portrait">
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SCRIPTS (only essential: hero typing, mobile menu, AOS) ========== -->
+    <script>
+        // ----- HERO TYPING (exactly as before) -----
+        const taglines = [
+            "Mechanical Engineer",
+            "SolidWorks & AutoCAD Designer",
+            "Arduino & IoT Enthusiast",
+            "Tech Explorer & Problem Solver"
+        ];
+        let index = 0, charIndex = 0, isDeleting = false;
+        const speed = 100, pause = 1500;
+        const typingElement = document.getElementById("typing-text");
+        function typeEffect() {
+            const current = taglines[index];
+            if (isDeleting) {
+                charIndex--;
+                typingElement.textContent = current.substring(0, charIndex);
+                if (charIndex === 0) {
+                    isDeleting = false;
+                    index = (index + 1) % taglines.length;
+                    setTimeout(typeEffect, 500);
+                } else {
+                    setTimeout(typeEffect, speed / 2);
+                }
+            } else {
+                charIndex++;
+                typingElement.textContent = current.substring(0, charIndex);
+                if (charIndex === current.length) {
+                    isDeleting = true;
+                    setTimeout(typeEffect, pause);
+                } else {
+                    setTimeout(typeEffect, speed);
+                }
+            }
+        }
+        document.addEventListener("DOMContentLoaded", typeEffect);
+    </script>
+
+    <script>
+        // ----- MOBILE MENU TOGGLE (same) -----
+        const menuBtn = document.getElementById('menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+        if (menuBtn && navMenu) {
+            menuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('hidden');
+            });
+        }
+    </script>
+
+    <!-- AOS INIT -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: false });
+    </script>
+
+    <!-- ensure hidden utility works with tailwind (small fix) -->
+    <style>
+        .hidden {
+            display: none !important;
+        }
+        @media (min-width: 1024px) {
+            .hidden {
+                display: flex !important;
+            }
+        }
+    </style>
+
+    <!-- scroll restoration already in head -->
+</body>
+</html>

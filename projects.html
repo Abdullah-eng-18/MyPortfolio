@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- same fonts, icons, tailwind, aos as homepage -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/e42d2ab83e.js" crossorigin="anonymous"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- your custom color variables & animations -->
+    <style>
+        .bg-primary { background-color: #14213d; }
+        .bg-accent { background-color: #322EBD; }
+        .bg-secondary { background-color: #7582C1; }
+        .bg-light { background-color: #e5e5e5; }
+        .text-primary { color: #14213d; }
+        .text-accent { color: #29447d; }
+        .text-secondary { color: #7582C1; }
+        .text-light { color: #e5e5e5; }
+        .hover-text-secondary:hover { color: #40455c; }
+
+        .blinking-cursor { animation: blink 1s step-start infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* card hover same as homepage group effect */
+        .project-card {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
+        }
+        .project-card:hover {
+            transform: scale(1.04);
+            box-shadow: 0 8px 24px 0 rgba(41, 68, 125, 0.15);
+        }
+
+        @keyframes slow-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes fast-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .slow-spin {
+            animation: slow-spin 6s linear infinite;
+        }
+        .group:hover .hover-spin {
+            animation: fast-spin 1s linear infinite !important;
+            transform: scale(1.25);
+            color: #021338;
+        }
+
+        .no-shadow-on-hover:hover {
+            box-shadow: none !important;
+            transform: scale(1.05) !important;
+        }
+
+        /* project bar animation (like skill bars) – but we use it for a subtle effect */
+        .project-tech-tag {
+            transition: all 0.2s ease;
+        }
+        .project-tech-tag:hover {
+            background-color: #29447d;
+            color: #e5e5e5;
+            transform: scale(1.05);
+        }
+
+        /* link arrow animation same as homepage */
+        .project-link i {
+            transition: transform 0.2s ease;
+        }
+        .project-link:hover i {
+            transform: translateX(6px);
+        }
+    </style>
+    <title>Projects – Abdullah Saif</title>
+</head>
+<body class="font-[Poppins] scroll-smooth">
+
+    <!-- ========== HEADER (exact copy from homepage) ========== -->
+    <header class="fixed z-50 bg-gradient-to-b from-zinc-300 to-white w-full">
+        <nav class="flex justify-between">
+            <a href="index.html">
+                <h2 class="group no-shadow-on-hover p-4 text-primary font-bold text-xl uppercase hover:scale-105 hover:cursor-pointer cursor-default transition-all duration-300 flex items-center gap-2">
+                    <i class="fas fa-cog text-primary slow-spin hover-spin transition-all duration-300"></i>
+                    Engg. Abdullah Saif
+                </h2>
+            </a>
+            <button id="menu-btn" class="lg:hidden text-primary text-2xl focus:outline-none pr-4">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul id="nav-menu" class="hidden lg:flex flex-col lg:flex-row gap-4 justify-end p-4 items-start lg:items-center text-primary font-semibold tracking-wider absolute lg:static top-full left-0 w-full lg:w-auto bg-white lg:bg-transparent shadow-md lg:shadow-none z-40 transition-all duration-300">
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl relative transition-all duration-300 ease-in-out flex items-center gap-2" href="index.html"><i class="fa-solid fa-house-user"></i> HOME</a></li>
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl relative transition-all duration-300 ease-in-out flex items-center gap-2" href="skills.html"><i class="fa-solid fa-screwdriver-wrench"></i> SKILLS</a></li>
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl relative transition-all duration-300 ease-in-out flex items-center gap-2" href="abdullah saif general.pdf" target="_blank"><i class="fa-solid fa-file"></i> RESUME</a></li>
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl relative transition-all duration-300 ease-in-out flex items-center gap-2" href="experience.html"><i class="fa-solid fa-person-walking-luggage"></i> EXPERIENCE</a></li>
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl relative transition-all duration-300 ease-in-out flex items-center gap-2" href="projects.html"><i class="fa-solid fa-gears"></i> PROJECTS</a></li>
+                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl relative transition-all duration-300 ease-in-out flex items-center gap-2" href="contact.html"><i class="fa-solid fa-address-book"></i> CONTACT ME</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ========== MAIN PROJECTS SECTION ========== -->
+    <main class="pt-32 pb-16 px-4 md:px-8 max-w-6xl mx-auto">
+        <!-- title with typing effect (like homepage) + cursor -->
+        <div class="mb-10 text-center" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 flex items-center justify-center gap-3 flex-wrap">
+                <i class="fa-solid fa-diagram-project text-primary"></i> 
+                <span>Projects I've Built</span>
+            </h2>
+            <div class="text-accent mt-2 h-8 text-lg md:text-xl">
+                <span id="projects-typing"></span><span class="blinking-cursor text-primary">|</span>
+            </div>
+            <p class="text-gray-600 mt-3 max-w-xl mx-auto">Two cards per row · each with name, description, tech & link</p>
+        </div>
+
+        <!-- PROJECTS GRID: two columns exactly as requested -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8" data-aos="fade-up" data-aos-delay="100">
+            
+            <!-- CARD 1 (complete project card) -->
+            <div class="project-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col">
+                <div class="flex items-start justify-between">
+                    <h3 class="text-2xl font-bold text-primary flex items-center gap-2">
+                        <i class="fa-solid fa-cubes text-secondary"></i>
+                        Orbit Monitor
+                    </h3>
+                    <span class="bg-zinc-100 text-xs font-semibold px-3 py-1 rounded-full text-primary">2025</span>
+                </div>
+                <p class="text-gray-700 mt-3 flex-1">
+                    Interactive 3D visualization of near‑earth objects using Three.js and real NASA data. Filter by size, orbit class, and close approach.
+                </p>
+                <!-- tech tags (like skills, but small) -->
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">Three.js</span>
+                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">NASA API</span>
+                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">WebGL</span>
+                </div>
+                <!-- link with arrow (same style as homepage "view my projects") -->
+                <a href="#" class="project-link mt-5 inline-flex items-center text-primary font-medium gap-2 group/link w-fit">
+                    <span>case study</span> <i class="fa-solid fa-arrow-right text-sm transition-transform"></i>
+                </a>
+            </div>
+
+            <!-- CARD 2 -->
+            <!-- <div class="project-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col">
+                <div class="flex items-start justify-between">
+                    <h3 class="text-2xl font-bold text-primary flex items-center gap-2">
+                        <i class="fa-solid fa-wind text-secondary"></i>
+                        Pollen
+                    </h3>
+                    <span class="bg-zinc-100 text-xs font-semibold px-3 py-1 rounded-full text-primary">2024</span>
+                </div>
+                <p class="text-gray-700 mt-3 flex-1">
+                    Lightweight privacy‑focused analytics dashboard for static sites. No cookies, aggregated insights & beautiful daily summaries.
+                </p>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">Vue.js</span>
+                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">D3</span>
+                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">PWA</span>
+                </div>
+                <a href="#" class="project-link mt-5 inline-flex items-center text-primary font-medium gap-2 group/link w-fit">
+                    <span>live demo</span> <i class="fa-solid fa-arrow-right text-sm transition-transform"></i>
+                </a>
+            </div> -->
+<div class="project-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col">
+    <div class="flex items-start justify-between">
+        <h3 class="text-2xl font-bold text-primary flex items-center gap-2">
+            <i class="fa-solid fa-compass-drafting text-secondary"></i>
+            CAD Practice
+        </h3>
+        <span class="bg-zinc-100 text-xs font-semibold px-3 py-1 rounded-full text-primary">2024</span>
+    </div>
+    <p class="text-gray-700 mt-3 flex-1">
+        A collection of technical drawings and 3D models created while learning AutoCAD and SolidWorks. Includes crane hook, engine blower, support bracket, and more.
+    </p>
+    <div class="flex flex-wrap gap-2 mt-4">
+        <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">AutoCAD</span>
+        <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">SolidWorks</span>
+        <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">2D/3D</span>
+    </div>
+    <a href="cad practice.html" class="project-link mt-5 inline-flex items-center text-primary font-medium gap-2 group/link w-fit">
+        <span>view drawings</span> <i class="fa-solid fa-arrow-right text-sm transition-transform"></i>
+    </a>
+</div>
+            <!-- CARD 3 -->
+            <div class="project-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col">
+                <div class="flex items-start justify-between">
+                    <h3 class="text-2xl font-bold text-primary flex items-center gap-2">
+                        <i class="fa-solid fa-palette text-secondary"></i>
+                        Chroma
+                    </h3>
+                    <span class="bg-zinc-100 text-xs font-semibold px-3 py-1 rounded-full text-primary">2024</span>
+                </div>
+                <p class="text-gray-700 mt-3 flex-1">
+                    Color palette generator based on your surroundings – uses phone camera to extract themes. Works offline as a PWA.
+                </p>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">TensorFlow.js</span>
+                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">React</span>
+                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">IndexedDB</span>
+                </div>
+                <a href="#" class="project-link mt-5 inline-flex items-center text-primary font-medium gap-2 group/link w-fit">
+                    <span>try tool</span> <i class="fa-solid fa-arrow-right text-sm transition-transform"></i>
+                </a>
+            </div>
+
+            <!-- CARD 4 -->
+            <div class="project-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col">
+                <div class="flex items-start justify-between">
+                    <h3 class="text-2xl font-bold text-primary flex items-center gap-2">
+                        <i class="fa-solid fa-headphones text-secondary"></i>
+                        Reverb
+                    </h3>
+                    <span class="bg-zinc-100 text-xs font-semibold px-3 py-1 rounded-full text-primary">2023</span>
+                </div>
+                <p class="text-gray-700 mt-3 flex-1">
+                    Collaborative playlist creation for small groups. Real‑time sync, Spotify integration, and voting system.
+                </p>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">Socket.io</span>
+                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">Node.js</span>
+                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">Spotify API</span>
+                </div>
+                <a href="#" class="project-link mt-5 inline-flex items-center text-primary font-medium gap-2 group/link w-fit">
+                    <span>repo</span> <i class="fa-solid fa-arrow-right text-sm transition-transform"></i>
+                </a>
+            </div>
+
+            <!-- CARD 5 (extra card to show odd number – still two cols) -->
+            <div class="project-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col">
+                <div class="flex items-start justify-between">
+                    <h3 class="text-2xl font-bold text-primary flex items-center gap-2">
+                        <i class="fa-solid fa-box-open text-secondary"></i>
+                        Catalog
+                    </h3>
+                    <span class="bg-zinc-100 text-xs font-semibold px-3 py-1 rounded-full text-primary">2023</span>
+                </div>
+                <p class="text-gray-700 mt-3 flex-1">
+                    Minimal inventory management for independent artists. Track prints, editions, gallery submissions.
+                </p>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">Python</span>
+                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">Django</span>
+                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">SQLite</span>
+                </div>
+                <a href="#" class="project-link mt-5 inline-flex items-center text-primary font-medium gap-2 group/link w-fit">
+                    <span>project site</span> <i class="fa-solid fa-arrow-right text-sm transition-transform"></i>
+                </a>
+            </div>
+
+            <!-- CARD 6 -->
+            <div class="project-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col">
+                <div class="flex items-start justify-between">
+                    <h3 class="text-2xl font-bold text-primary flex items-center gap-2">
+                        <i class="fa-solid fa-water text-secondary"></i>
+                        Horizon
+                    </h3>
+                    <span class="bg-zinc-100 text-xs font-semibold px-3 py-1 rounded-full text-primary">2025</span>
+                </div>
+                <p class="text-gray-700 mt-3 flex-1">
+                    Weather & tides for sailors and coastal explorers. Hyperlocal forecasts with beautiful wave visualizations.
+                </p>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">Mapbox</span>
+                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">Leaflet</span>
+                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">OpenWeather</span>
+                </div>
+                <a href="#" class="project-link mt-5 inline-flex items-center text-primary font-medium gap-2 group/link w-fit">
+                    <span>open app</span> <i class="fa-solid fa-arrow-right text-sm transition-transform"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- optional extra section similar to homepage “experience” but with a subtle message -->
+        <div class="mt-16 text-center bg-zinc-50 p-8 rounded-3xl max-w-3xl mx-auto" data-aos="fade-up">
+            <i class="fa-solid fa-code-branch text-4xl text-primary mb-3"></i>
+            <h3 class="text-2xl font-semibold text-primary">more projects brewing</h3>
+            <p class="text-gray-600 mt-2">I’m constantly experimenting with mechanical + digital builds. This grid updates as new things ship.</p>
+        </div>
+    </main>
+
+    <!-- ========== TYPING EFFECT FOR PROJECTS PAGE (same pattern as homepage) ========== -->
+    <script>
+        (function() {
+            const projectTaglines = [
+                "mechanical + digital builds",
+                "Arduino · ESP32 · automation",
+                "CAD models & interactive prototypes",
+                "every project tells a story",
+                "from concept to creation"
+            ];
+
+            let projIndex = 0;
+            let projCharIndex = 0;
+            let projDeleting = false;
+            const projSpeed = 100;
+            const projPause = 1500;
+
+            const projElement = document.getElementById("projects-typing");
+            if (projElement) {
+                function projTypeEffect() {
+                    const current = projectTaglines[projIndex];
+                    if (projDeleting) {
+                        projCharIndex--;
+                        projElement.textContent = current.substring(0, projCharIndex);
+                        if (projCharIndex === 0) {
+                            projDeleting = false;
+                            projIndex = (projIndex + 1) % projectTaglines.length;
+                            setTimeout(projTypeEffect, 500);
+                        } else {
+                            setTimeout(projTypeEffect, projSpeed / 2);
+                        }
+                    } else {
+                        projCharIndex++;
+                        projElement.textContent = current.substring(0, projCharIndex);
+                        if (projCharIndex === current.length) {
+                            projDeleting = true;
+                            setTimeout(projTypeEffect, projPause);
+                        } else {
+                            setTimeout(projTypeEffect, projSpeed);
+                        }
+                    }
+                }
+                // start after DOM ready
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', projTypeEffect);
+                } else {
+                    projTypeEffect();
+                }
+            }
+        })();
+    </script>
+
+    <!-- mobile menu toggle (exact copy from homepage) -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const navMenu = document.getElementById('nav-menu');
+        if (menuBtn && navMenu) {
+            menuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('hidden');
+            });
+        }
+    </script>
+
+    <!-- AOS initialization -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: false,
+        });
+    </script>
+
+    <!-- small addition: scroll reset for reloads (from homepage) -->
+    <script>
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+    </script>
+
+    <!-- optional skill-bar-like animation for tech tags? we already have hover, but we keep the same spirit -->
+    <!-- no extra skill bars needed, but we keep the consistency -->
+
+</body>
+</html>

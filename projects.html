@@ -3,363 +3,550 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- same fonts, icons, tailwind, aos as homepage -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/e42d2ab83e.js" crossorigin="anonymous"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- your custom color variables & animations -->
+    <title>Projects – Abdullah Saif</title>
     <style>
-        .bg-primary { background-color: #14213d; }
-        .bg-accent { background-color: #322EBD; }
-        .bg-secondary { background-color: #7582C1; }
-        .bg-light { background-color: #e5e5e5; }
+        .bg-primary  { background-color: #14213d; }
         .text-primary { color: #14213d; }
-        .text-accent { color: #29447d; }
+        .text-accent  { color: #29447d; }
         .text-secondary { color: #7582C1; }
-        .text-light { color: #e5e5e5; }
         .hover-text-secondary:hover { color: #40455c; }
 
         .blinking-cursor { animation: blink 1s step-start infinite; }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* card hover same as homepage group effect */
-        .project-card {
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
-        }
-        .project-card:hover {
-            transform: scale(1.04);
-            box-shadow: 0 8px 24px 0 rgba(41, 68, 125, 0.15);
-        }
-
-        @keyframes slow-spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        @keyframes fast-spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        .slow-spin {
-            animation: slow-spin 6s linear infinite;
-        }
+        @keyframes slow-spin { to { transform: rotate(360deg); } }
+        @keyframes fast-spin { to { transform: rotate(360deg); } }
+        .slow-spin { animation: slow-spin 6s linear infinite; }
         .group:hover .hover-spin {
             animation: fast-spin 1s linear infinite !important;
-            transform: scale(1.25);
-            color: #021338;
+            transform: scale(1.25); color: #021338;
+        }
+        .no-shadow-on-hover:hover { box-shadow: none !important; transform: scale(1.05) !important; }
+
+        /* project card */
+        .project-card {
+            transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .project-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 28px 0 rgba(41,68,125,0.18);
         }
 
-        .no-shadow-on-hover:hover {
-            box-shadow: none !important;
-            transform: scale(1.05) !important;
+        .project-tech-tag { transition: all 0.2s ease; }
+        .project-tech-tag:hover { background-color: #29447d; color: #e5e5e5; transform: scale(1.05); }
+
+        /* category divider */
+        .proj-category {
+            border-left: 6px solid #7582C1;
+            padding-left: 1rem;
+            margin: 2.5rem 0 1.5rem;
         }
 
-        /* project bar animation (like skill bars) – but we use it for a subtle effect */
-        .project-tech-tag {
-            transition: all 0.2s ease;
+        /* ── MODAL OVERLAY ── */
+        #modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(10,16,35,0.55);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
         }
-        .project-tech-tag:hover {
-            background-color: #29447d;
-            color: #e5e5e5;
-            transform: scale(1.05);
+        #modal-overlay.active { display: flex; }
+
+        #modal-box {
+            background: #fff;
+            border-radius: 1.5rem;
+            max-width: 780px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 24px 60px rgba(20,33,61,0.25);
+            animation: modalIn 0.3s cubic-bezier(0.22,1,0.36,1);
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.92) translateY(24px); }
+            to   { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .modal-media {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #f1f1f1;
+            border-radius: 1.25rem 1.25rem 0 0;
+            overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+            color: #aaa; font-size: 0.9rem;
+        }
+        .modal-media iframe, .modal-media img {
+            width: 100%; height: 100%; object-fit: cover; border: none;
+        }
+        .modal-body { padding: 1.5rem 2rem 2rem; }
+        @media (max-width: 600px) { .modal-body { padding: 1.25rem 1.25rem 1.75rem; } }
+
+        .modal-tag {
+            background: #f0f2f5; color: #14213d;
+            padding: 0.25rem 0.75rem; border-radius: 999px;
+            font-size: 0.75rem; font-weight: 500;
         }
 
-        /* link arrow animation same as homepage */
-        .project-link i {
-            transition: transform 0.2s ease;
-        }
-        .project-link:hover i {
-            transform: translateX(6px);
-        }
+        .hidden { display: none !important; }
+        @media (min-width: 1024px) { .hidden { display: flex !important; } }
     </style>
-    <title>Projects – Abdullah Saif</title>
 </head>
-<body class="font-[Poppins] scroll-smooth">
+<body class="font-[Poppins] scroll-smooth antialiased">
 
-    <!-- ========== HEADER (exact copy from homepage) ========== -->
-    <header class="fixed z-50 bg-gradient-to-b from-zinc-300 to-white w-full">
-        <nav class="flex justify-between">
-            <a href="index.html">
-                <h2 class="group no-shadow-on-hover p-4 text-primary font-bold text-xl uppercase hover:scale-105 hover:cursor-pointer cursor-default transition-all duration-300 flex items-center gap-2">
-                    <i class="fas fa-cog text-primary slow-spin hover-spin transition-all duration-300"></i>
-                    Engg. Abdullah Saif
-                </h2>
-            </a>
-            <button id="menu-btn" class="lg:hidden text-primary text-2xl focus:outline-none pr-4">
-                <i class="fas fa-bars"></i>
-            </button>
-            <ul id="nav-menu" class="hidden lg:flex flex-col lg:flex-row gap-4 justify-end p-4 items-start lg:items-center text-primary font-semibold tracking-wider absolute lg:static top-full left-0 w-full lg:w-auto bg-white lg:bg-transparent shadow-md lg:shadow-none z-40 transition-all duration-300">
-                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl relative transition-all duration-300 ease-in-out flex items-center gap-2" href="index.html"><i class="fa-solid fa-house-user"></i> HOME</a></li>
-                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl relative transition-all duration-300 ease-in-out flex items-center gap-2" href="skills.html"><i class="fa-solid fa-screwdriver-wrench"></i> SKILLS</a></li>
-                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl relative transition-all duration-300 ease-in-out flex items-center gap-2" href="abdullah saif general.pdf" target="_blank"><i class="fa-solid fa-file"></i> RESUME</a></li>
-                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl relative transition-all duration-300 ease-in-out flex items-center gap-2" href="experience.html"><i class="fa-solid fa-person-walking-luggage"></i> EXPERIENCE</a></li>
-                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl relative transition-all duration-300 ease-in-out flex items-center gap-2" href="projects.html"><i class="fa-solid fa-gears"></i> PROJECTS</a></li>
-                <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl relative transition-all duration-300 ease-in-out flex items-center gap-2" href="contact.html"><i class="fa-solid fa-address-book"></i> CONTACT ME</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- ========== MAIN PROJECTS SECTION ========== -->
-    <main class="pt-32 pb-16 px-4 md:px-8 max-w-6xl mx-auto">
-        <!-- title with typing effect (like homepage) + cursor -->
-        <div class="mb-10 text-center" data-aos="fade-up">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 flex items-center justify-center gap-3 flex-wrap">
-                <i class="fa-solid fa-diagram-project text-primary"></i> 
-                <span>Projects I've Built</span>
+<!-- ========== HEADER – exact from index.html ========== -->
+<header class="fixed z-50 bg-gradient-to-b from-zinc-300 to-white w-full shadow-sm">
+    <nav class="flex justify-between items-center px-4 lg:px-6">
+        <a href="index.html">
+            <h2 class="group no-shadow-on-hover py-4 text-primary font-bold text-xl uppercase hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                <i class="fas fa-cog text-primary slow-spin hover-spin transition-all duration-300"></i>
+                Engg. Abdullah Saif
             </h2>
-            <div class="text-accent mt-2 h-8 text-lg md:text-xl">
-                <span id="projects-typing"></span><span class="blinking-cursor text-primary">|</span>
+        </a>
+        <button id="menu-btn" class="lg:hidden text-primary text-2xl focus:outline-none pr-2">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul id="nav-menu" class="hidden lg:flex flex-col lg:flex-row gap-4 lg:gap-5 p-4 lg:p-0 items-start lg:items-center text-primary font-semibold tracking-wider absolute lg:static top-full left-0 w-full lg:w-auto bg-white lg:bg-transparent shadow-md lg:shadow-none z-40 transition-all duration-300">
+            <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl flex items-center gap-2" href="index.html"><i class="fa-solid fa-house-user"></i> HOME</a></li>
+            <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl flex items-center gap-2" href="projects.html"><i class="fa-solid fa-gears"></i> PROJECTS</a></li>
+            <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl flex items-center gap-2" href="skills.html"><i class="fa-solid fa-screwdriver-wrench"></i> SKILLS</a></li>
+            <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl flex items-center gap-2" href="experience.html"><i class="fa-solid fa-person-walking-luggage"></i> EXPERIENCE</a></li>
+            <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl flex items-center gap-2" href="Abdullah_Saif_Resume.pdf" target="_blank"><i class="fa-solid fa-file"></i> RESUME</a></li>
+            <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl flex items-center gap-2" href="contact.html"><i class="fa-solid fa-address-book"></i> CONTACT</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- ========== MODAL OVERLAY ========== -->
+<div id="modal-overlay" onclick="closeModal(event)">
+    <div id="modal-box">
+        <!-- media area (YouTube / image / placeholder) -->
+        <div class="modal-media" id="modal-media"></div>
+        <!-- content -->
+        <div class="modal-body">
+            <div class="flex items-start justify-between gap-4 mb-3">
+                <h3 id="modal-title" class="text-2xl font-bold text-primary"></h3>
+                <button onclick="closeModalDirect()" class="text-gray-400 hover:text-primary transition-colors text-xl shrink-0 mt-1">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
             </div>
-            <p class="text-gray-600 mt-3 max-w-xl mx-auto">Two cards per row · each with name, description, tech & link</p>
+            <div id="modal-tags" class="flex flex-wrap gap-2 mb-4"></div>
+            <p id="modal-desc" class="text-gray-700 text-sm leading-relaxed mb-4"></p>
+            <ul id="modal-bullets" class="space-y-2 mb-5"></ul>
+            <div id="modal-link"></div>
         </div>
-
-        <!-- PROJECTS GRID: two columns exactly as requested -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8" data-aos="fade-up" data-aos-delay="100">
-            
-            <!-- CARD 1 (complete project card) -->
-            <div class="project-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col">
-                <div class="flex items-start justify-between">
-                    <h3 class="text-2xl font-bold text-primary flex items-center gap-2">
-                        <i class="fa-solid fa-cubes text-secondary"></i>
-                        Orbit Monitor
-                    </h3>
-                    <span class="bg-zinc-100 text-xs font-semibold px-3 py-1 rounded-full text-primary">2025</span>
-                </div>
-                <p class="text-gray-700 mt-3 flex-1">
-                    Interactive 3D visualization of near‑earth objects using Three.js and real NASA data. Filter by size, orbit class, and close approach.
-                </p>
-                <!-- tech tags (like skills, but small) -->
-                <div class="flex flex-wrap gap-2 mt-4">
-                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">Three.js</span>
-                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">NASA API</span>
-                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">WebGL</span>
-                </div>
-                <!-- link with arrow (same style as homepage "view my projects") -->
-                <a href="#" class="project-link mt-5 inline-flex items-center text-primary font-medium gap-2 group/link w-fit">
-                    <span>case study</span> <i class="fa-solid fa-arrow-right text-sm transition-transform"></i>
-                </a>
-            </div>
-
-            <!-- CARD 2 -->
-            <!-- <div class="project-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col">
-                <div class="flex items-start justify-between">
-                    <h3 class="text-2xl font-bold text-primary flex items-center gap-2">
-                        <i class="fa-solid fa-wind text-secondary"></i>
-                        Pollen
-                    </h3>
-                    <span class="bg-zinc-100 text-xs font-semibold px-3 py-1 rounded-full text-primary">2024</span>
-                </div>
-                <p class="text-gray-700 mt-3 flex-1">
-                    Lightweight privacy‑focused analytics dashboard for static sites. No cookies, aggregated insights & beautiful daily summaries.
-                </p>
-                <div class="flex flex-wrap gap-2 mt-4">
-                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">Vue.js</span>
-                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">D3</span>
-                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">PWA</span>
-                </div>
-                <a href="#" class="project-link mt-5 inline-flex items-center text-primary font-medium gap-2 group/link w-fit">
-                    <span>live demo</span> <i class="fa-solid fa-arrow-right text-sm transition-transform"></i>
-                </a>
-            </div> -->
-<div class="project-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col">
-    <div class="flex items-start justify-between">
-        <h3 class="text-2xl font-bold text-primary flex items-center gap-2">
-            <i class="fa-solid fa-compass-drafting text-secondary"></i>
-            CAD Practice
-        </h3>
-        <span class="bg-zinc-100 text-xs font-semibold px-3 py-1 rounded-full text-primary">2024</span>
     </div>
-    <p class="text-gray-700 mt-3 flex-1">
-        A collection of technical drawings and 3D models created while learning AutoCAD and SolidWorks. Includes crane hook, engine blower, support bracket, and more.
-    </p>
-    <div class="flex flex-wrap gap-2 mt-4">
-        <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">AutoCAD</span>
-        <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">SolidWorks</span>
-        <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">2D/3D</span>
-    </div>
-    <a href="cad practice.html" class="project-link mt-5 inline-flex items-center text-primary font-medium gap-2 group/link w-fit">
-        <span>view drawings</span> <i class="fa-solid fa-arrow-right text-sm transition-transform"></i>
-    </a>
 </div>
-            <!-- CARD 3 -->
-            <div class="project-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col">
-                <div class="flex items-start justify-between">
-                    <h3 class="text-2xl font-bold text-primary flex items-center gap-2">
-                        <i class="fa-solid fa-palette text-secondary"></i>
-                        Chroma
-                    </h3>
-                    <span class="bg-zinc-100 text-xs font-semibold px-3 py-1 rounded-full text-primary">2024</span>
-                </div>
-                <p class="text-gray-700 mt-3 flex-1">
-                    Color palette generator based on your surroundings – uses phone camera to extract themes. Works offline as a PWA.
-                </p>
-                <div class="flex flex-wrap gap-2 mt-4">
-                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">TensorFlow.js</span>
-                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">React</span>
-                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">IndexedDB</span>
-                </div>
-                <a href="#" class="project-link mt-5 inline-flex items-center text-primary font-medium gap-2 group/link w-fit">
-                    <span>try tool</span> <i class="fa-solid fa-arrow-right text-sm transition-transform"></i>
-                </a>
-            </div>
 
-            <!-- CARD 4 -->
-            <div class="project-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col">
-                <div class="flex items-start justify-between">
-                    <h3 class="text-2xl font-bold text-primary flex items-center gap-2">
-                        <i class="fa-solid fa-headphones text-secondary"></i>
-                        Reverb
-                    </h3>
-                    <span class="bg-zinc-100 text-xs font-semibold px-3 py-1 rounded-full text-primary">2023</span>
-                </div>
-                <p class="text-gray-700 mt-3 flex-1">
-                    Collaborative playlist creation for small groups. Real‑time sync, Spotify integration, and voting system.
-                </p>
-                <div class="flex flex-wrap gap-2 mt-4">
-                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">Socket.io</span>
-                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">Node.js</span>
-                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">Spotify API</span>
-                </div>
-                <a href="#" class="project-link mt-5 inline-flex items-center text-primary font-medium gap-2 group/link w-fit">
-                    <span>repo</span> <i class="fa-solid fa-arrow-right text-sm transition-transform"></i>
-                </a>
-            </div>
+<!-- ========== MAIN ========== -->
+<main class="pt-32 pb-16 px-4 md:px-8 max-w-6xl mx-auto">
 
-            <!-- CARD 5 (extra card to show odd number – still two cols) -->
-            <div class="project-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col">
-                <div class="flex items-start justify-between">
-                    <h3 class="text-2xl font-bold text-primary flex items-center gap-2">
-                        <i class="fa-solid fa-box-open text-secondary"></i>
-                        Catalog
-                    </h3>
-                    <span class="bg-zinc-100 text-xs font-semibold px-3 py-1 rounded-full text-primary">2023</span>
-                </div>
-                <p class="text-gray-700 mt-3 flex-1">
-                    Minimal inventory management for independent artists. Track prints, editions, gallery submissions.
-                </p>
-                <div class="flex flex-wrap gap-2 mt-4">
-                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">Python</span>
-                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">Django</span>
-                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">SQLite</span>
-                </div>
-                <a href="#" class="project-link mt-5 inline-flex items-center text-primary font-medium gap-2 group/link w-fit">
-                    <span>project site</span> <i class="fa-solid fa-arrow-right text-sm transition-transform"></i>
-                </a>
-            </div>
+    <!-- page title -->
+    <div class="mb-10 text-center" data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 flex items-center justify-center gap-3 flex-wrap">
+            <i class="fa-solid fa-diagram-project text-primary"></i>
+            <span>Projects I've Built</span>
+        </h2>
+        <div class="text-accent mt-2 h-8 text-lg md:text-xl">
+            <span id="projects-typing"></span><span class="blinking-cursor text-primary">|</span>
+        </div>
+        <p class="text-gray-500 mt-3 max-w-xl mx-auto text-sm">Click any card to open full details</p>
+    </div>
 
-            <!-- CARD 6 -->
-            <div class="project-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col">
-                <div class="flex items-start justify-between">
-                    <h3 class="text-2xl font-bold text-primary flex items-center gap-2">
-                        <i class="fa-solid fa-water text-secondary"></i>
-                        Horizon
-                    </h3>
-                    <span class="bg-zinc-100 text-xs font-semibold px-3 py-1 rounded-full text-primary">2025</span>
-                </div>
-                <p class="text-gray-700 mt-3 flex-1">
-                    Weather & tides for sailors and coastal explorers. Hyperlocal forecasts with beautiful wave visualizations.
-                </p>
-                <div class="flex flex-wrap gap-2 mt-4">
-                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">Mapbox</span>
-                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">Leaflet</span>
-                    <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium transition">OpenWeather</span>
-                </div>
-                <a href="#" class="project-link mt-5 inline-flex items-center text-primary font-medium gap-2 group/link w-fit">
-                    <span>open app</span> <i class="fa-solid fa-arrow-right text-sm transition-transform"></i>
-                </a>
+    <!-- ══════════════════════════════════════
+         CATEGORY 1 – EMBEDDED SYSTEMS
+    ══════════════════════════════════════ -->
+    <div class="proj-category" data-aos="fade-right">
+        <h3 class="text-xl font-semibold text-primary flex items-center gap-3">
+            <i class="fa-solid fa-microchip text-secondary"></i> Embedded Systems & Electronics
+        </h3>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8" data-aos="fade-up" data-aos-delay="80">
+
+        <!-- ESP32 VISCOMETER -->
+        <div class="project-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col"
+            onclick="openModal({
+                title: 'ESP32-Based Viscometer',
+                year: '2024',
+                media: { type: 'placeholder', icon: 'fa-flask', label: 'Add your project video/image here' },
+                tags: ['ESP32','Arduino C/C++','Sensor Integration','IoT','Data Acquisition'],
+                desc: 'A functional viscometer built using an ESP32 microcontroller to measure fluid viscosity through real-time sensor data acquisition. Designed and validated the full embedded system from hardware to firmware.',
+                bullets: [
+                    'Designed complete embedded system architecture from hardware wiring to firmware',
+                    'Programmed sensor calibration and data processing logic in Arduino C/C++',
+                    'Validated viscosity readings against known fluid standards — improved accuracy iteratively',
+                    'Documented test methodology, performance analysis, and system validation in a formal technical report'
+                ],
+                link: { url: 'https://github.com/Abdullah-saif-18', label: 'GitHub Repository', icon: 'fa-brands fa-github' }
+            })">
+            <div class="flex items-start justify-between mb-3">
+                <h3 class="text-lg font-bold text-primary flex items-center gap-2">
+                    <i class="fa-solid fa-flask text-secondary"></i> ESP32-Based Viscometer
+                </h3>
+                <span class="bg-zinc-100 text-xs font-semibold px-3 py-1 rounded-full text-primary shrink-0 ml-2">2024</span>
             </div>
+            <p class="text-gray-600 text-sm flex-1">Viscometer using ESP32 with real-time data acquisition to measure fluid viscosity. Full system from hardware to firmware.</p>
+            <div class="flex flex-wrap gap-2 mt-4">
+                <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">ESP32</span>
+                <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Arduino C/C++</span>
+                <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Sensor Integration</span>
+            </div>
+            <p class="text-xs text-secondary mt-4 font-medium flex items-center gap-1"><i class="fa-solid fa-up-right-and-down-left-from-center text-xs"></i> Click to view details</p>
         </div>
 
-        <!-- optional extra section similar to homepage “experience” but with a subtle message -->
-        <div class="mt-16 text-center bg-zinc-50 p-8 rounded-3xl max-w-3xl mx-auto" data-aos="fade-up">
-            <i class="fa-solid fa-code-branch text-4xl text-primary mb-3"></i>
-            <h3 class="text-2xl font-semibold text-primary">more projects brewing</h3>
-            <p class="text-gray-600 mt-2">I’m constantly experimenting with mechanical + digital builds. This grid updates as new things ship.</p>
+        <!--
+        ╔══════════════════════════════════════════════════════════════╗
+        ║  TEMPLATE — EMBEDDED SYSTEMS PROJECT                        ║
+        ║  Copy this block, uncomment it, and fill in your details    ║
+        ╚══════════════════════════════════════════════════════════════╝
+
+        <div class="project-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col"
+            onclick="openModal({
+                title: 'YOUR PROJECT TITLE',
+                year: 'YEAR',
+                media: { type: 'youtube', id: 'YOUTUBE_VIDEO_ID' },
+                // OR for an image: media: { type: 'image', src: 'your-image.jpg', alt: 'description' },
+                // OR placeholder: media: { type: 'placeholder', icon: 'fa-microchip', label: 'Photo coming soon' },
+                tags: ['Tag1','Tag2','Tag3'],
+                desc: 'One paragraph overview of the project.',
+                bullets: [
+                    'What you designed or built',
+                    'Key technical challenge solved',
+                    'Result or validation',
+                    'Documentation or presentation delivered'
+                ],
+                link: { url: 'YOUR_LINK', label: 'Link Label', icon: 'fa-solid fa-arrow-right' }
+                // remove link: line entirely if no link
+            })">
+            <div class="flex items-start justify-between mb-3">
+                <h3 class="text-lg font-bold text-primary flex items-center gap-2">
+                    <i class="fa-solid fa-microchip text-secondary"></i> YOUR PROJECT TITLE
+                </h3>
+                <span class="bg-zinc-100 text-xs font-semibold px-3 py-1 rounded-full text-primary shrink-0 ml-2">YEAR</span>
+            </div>
+            <p class="text-gray-600 text-sm flex-1">Short 1–2 line summary shown on the card.</p>
+            <div class="flex flex-wrap gap-2 mt-4">
+                <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Tag1</span>
+                <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Tag2</span>
+            </div>
+            <p class="text-xs text-secondary mt-4 font-medium flex items-center gap-1"><i class="fa-solid fa-up-right-and-down-left-from-center text-xs"></i> Click to view details</p>
         </div>
-    </main>
+        -->
 
-    <!-- ========== TYPING EFFECT FOR PROJECTS PAGE (same pattern as homepage) ========== -->
-    <script>
-        (function() {
-            const projectTaglines = [
-                "mechanical + digital builds",
-                "Arduino · ESP32 · automation",
-                "CAD models & interactive prototypes",
-                "every project tells a story",
-                "from concept to creation"
-            ];
+    </div>
 
-            let projIndex = 0;
-            let projCharIndex = 0;
-            let projDeleting = false;
-            const projSpeed = 100;
-            const projPause = 1500;
+    <!-- ══════════════════════════════════════
+         CATEGORY 2 – ENGINEERING & ANALYSIS
+    ══════════════════════════════════════ -->
+    <div class="proj-category" data-aos="fade-right">
+        <h3 class="text-xl font-semibold text-primary flex items-center gap-3">
+            <i class="fa-solid fa-gear text-secondary"></i> Engineering Mechanics & Analysis
+        </h3>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8" data-aos="fade-up" data-aos-delay="80">
 
-            const projElement = document.getElementById("projects-typing");
-            if (projElement) {
-                function projTypeEffect() {
-                    const current = projectTaglines[projIndex];
-                    if (projDeleting) {
-                        projCharIndex--;
-                        projElement.textContent = current.substring(0, projCharIndex);
-                        if (projCharIndex === 0) {
-                            projDeleting = false;
-                            projIndex = (projIndex + 1) % projectTaglines.length;
-                            setTimeout(projTypeEffect, 500);
-                        } else {
-                            setTimeout(projTypeEffect, projSpeed / 2);
-                        }
-                    } else {
-                        projCharIndex++;
-                        projElement.textContent = current.substring(0, projCharIndex);
-                        if (projCharIndex === current.length) {
-                            projDeleting = true;
-                            setTimeout(projTypeEffect, projPause);
-                        } else {
-                            setTimeout(projTypeEffect, projSpeed);
-                        }
-                    }
-                }
-                // start after DOM ready
-                if (document.readyState === 'loading') {
-                    document.addEventListener('DOMContentLoaded', projTypeEffect);
-                } else {
-                    projTypeEffect();
-                }
-            }
-        })();
-    </script>
+        <!-- JIB CRANE -->
+        <div class="project-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col"
+            onclick="openModal({
+                title: 'Jib Crane – Structural Force Analysis',
+                year: '2024',
+                media: { type: 'placeholder', icon: 'fa-building-un', label: 'Add your project photo or report here' },
+                tags: ['Engineering Mechanics','Statics','Force Analysis','Factor of Safety','Technical Report'],
+                desc: 'Designed a scaled jib crane model and performed a complete static structural analysis under multiple loading conditions. Included hand calculations, force diagrams, and formal presentation to faculty.',
+                bullets: [
+                    'Designed scaled jib crane model and identified all load cases',
+                    'Calculated reaction forces, member loads, and factor of safety analytically',
+                    'Validated structural simulation results against theoretical calculations',
+                    'Prepared formal technical documentation and delivered structured presentation to faculty evaluators'
+                ]
+            })">
+            <div class="flex items-start justify-between mb-3">
+                <h3 class="text-lg font-bold text-primary flex items-center gap-2">
+                    <i class="fa-solid fa-building-un text-secondary"></i> Jib Crane Analysis
+                </h3>
+                <span class="bg-zinc-100 text-xs font-semibold px-3 py-1 rounded-full text-primary shrink-0 ml-2">2024</span>
+            </div>
+            <p class="text-gray-600 text-sm flex-1">Complete static force and load analysis of a scaled jib crane model under multiple load conditions.</p>
+            <div class="flex flex-wrap gap-2 mt-4">
+                <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Statics</span>
+                <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Force Analysis</span>
+                <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Factor of Safety</span>
+            </div>
+            <p class="text-xs text-secondary mt-4 font-medium flex items-center gap-1"><i class="fa-solid fa-up-right-and-down-left-from-center text-xs"></i> Click to view details</p>
+        </div>
 
-    <!-- mobile menu toggle (exact copy from homepage) -->
-    <script>
-        const menuBtn = document.getElementById('menu-btn');
-        const navMenu = document.getElementById('nav-menu');
-        if (menuBtn && navMenu) {
-            menuBtn.addEventListener('click', () => {
-                navMenu.classList.toggle('hidden');
-            });
-        }
-    </script>
+        <!-- PYTHON DATA ANALYSIS -->
+        <div class="project-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col"
+            onclick="openModal({
+                title: 'Python Data Analysis & Visualization',
+                year: '2024',
+                media: { type: 'placeholder', icon: 'fa-chart-line', label: 'Add a chart screenshot or demo here' },
+                tags: ['Python','Pandas','NumPy','Matplotlib','Data Analysis','Google Certified'],
+                desc: 'Analyzed engineering datasets using Python — data wrangling with Pandas, numerical computation with NumPy, and visualizations with Matplotlib for technical reporting.',
+                bullets: [
+                    'Cleaned, filtered, and restructured raw engineering datasets using Pandas',
+                    'Applied NumPy for numerical computation and statistical summaries',
+                    'Generated Matplotlib plots communicating trends for technical reports',
+                    'Completed Google/Coursera Python Programming Certificate alongside this work'
+                ],
+                link: { url: 'https://github.com/Abdullah-saif-18', label: 'GitHub', icon: 'fa-brands fa-github' }
+            })">
+            <div class="flex items-start justify-between mb-3">
+                <h3 class="text-lg font-bold text-primary flex items-center gap-2">
+                    <i class="fa-solid fa-chart-line text-secondary"></i> Python Data Analysis
+                </h3>
+                <span class="bg-zinc-100 text-xs font-semibold px-3 py-1 rounded-full text-primary shrink-0 ml-2">2024</span>
+            </div>
+            <p class="text-gray-600 text-sm flex-1">Engineering dataset analysis using Pandas, NumPy, and Matplotlib for visualization and technical reporting.</p>
+            <div class="flex flex-wrap gap-2 mt-4">
+                <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Python</span>
+                <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Pandas</span>
+                <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Matplotlib</span>
+            </div>
+            <p class="text-xs text-secondary mt-4 font-medium flex items-center gap-1"><i class="fa-solid fa-up-right-and-down-left-from-center text-xs"></i> Click to view details</p>
+        </div>
 
-    <!-- AOS initialization -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            duration: 800,
-            once: false,
-        });
-    </script>
+        <!--
+        ╔══════════════════════════════════════════════════════════════╗
+        ║  TEMPLATE — ENGINEERING / ANALYSIS PROJECT                  ║
+        ╚══════════════════════════════════════════════════════════════╝
 
-    <!-- small addition: scroll reset for reloads (from homepage) -->
-    <script>
-        if ('scrollRestoration' in history) {
-            history.scrollRestoration = 'manual';
-        }
-        window.scrollTo(0, 0);
-    </script>
+        <div class="project-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col"
+            onclick="openModal({
+                title: 'YOUR PROJECT TITLE',
+                year: 'YEAR',
+                media: { type: 'placeholder', icon: 'fa-gear', label: 'Photo / report coming soon' },
+                tags: ['Tag1','Tag2'],
+                desc: 'Project description paragraph.',
+                bullets: ['Bullet 1','Bullet 2','Bullet 3']
+            })">
+            <div class="flex items-start justify-between mb-3">
+                <h3 class="text-lg font-bold text-primary flex items-center gap-2">
+                    <i class="fa-solid fa-gear text-secondary"></i> YOUR PROJECT TITLE
+                </h3>
+                <span class="bg-zinc-100 text-xs font-semibold px-3 py-1 rounded-full text-primary shrink-0 ml-2">YEAR</span>
+            </div>
+            <p class="text-gray-600 text-sm flex-1">Short card summary.</p>
+            <div class="flex flex-wrap gap-2 mt-4">
+                <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Tag1</span>
+            </div>
+            <p class="text-xs text-secondary mt-4 font-medium flex items-center gap-1"><i class="fa-solid fa-up-right-and-down-left-from-center text-xs"></i> Click to view details</p>
+        </div>
+        -->
 
-    <!-- optional skill-bar-like animation for tech tags? we already have hover, but we keep the same spirit -->
-    <!-- no extra skill bars needed, but we keep the consistency -->
+    </div>
+
+    <!-- ══════════════════════════════════════
+         CATEGORY 3 – CAD DESIGN & 3D MODELLING
+    ══════════════════════════════════════ -->
+    <div class="proj-category" data-aos="fade-right">
+        <h3 class="text-xl font-semibold text-primary flex items-center gap-3">
+            <i class="fa-solid fa-compass-drafting text-secondary"></i> CAD Design & 3D Modelling
+        </h3>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8" data-aos="fade-up" data-aos-delay="80">
+
+        <!-- CAD PRACTICE COLLECTION -->
+        <div class="project-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col"
+            onclick="openModal({
+                title: 'CAD Practice Collection',
+                year: '2024',
+                media: { type: 'youtube', id: '-mFCQ-aAz0k' },
+                tags: ['AutoCAD','SolidWorks','2D Drafting','3D Modelling','GD&T','Certified'],
+                desc: 'A collection of technical drawings and 3D models built during AutoCAD certification training at UET Lahore. Covers orthographic projection, section views, dimensioning, GD&T annotations, and 3D part modelling.',
+                bullets: [
+                    'Crane Hook — 2D orthographic drafting with dimensioning and layer management',
+                    'Engine Blower — multi-view drawing with section views and hatching',
+                    'Applied GD&T annotations and engineering drawing standards throughout',
+                    'Completed as part of UET Lahore AutoCAD certification (Jan–Feb 2025)'
+                ],
+                link: { url: 'cad_practice.html', label: 'View Full Drawing Gallery', icon: 'fa-solid fa-compass-drafting' }
+            })">
+            <div class="flex items-start justify-between mb-3">
+                <h3 class="text-lg font-bold text-primary flex items-center gap-2">
+                    <i class="fa-solid fa-cubes text-secondary"></i> CAD Practice Collection
+                </h3>
+                <span class="bg-zinc-100 text-xs font-semibold px-3 py-1 rounded-full text-primary shrink-0 ml-2">2024</span>
+            </div>
+            <p class="text-gray-600 text-sm flex-1">Crane Hook, Engine Blower and more — 2D drafting & 3D modelling built during AutoCAD certification at UET Lahore.</p>
+            <div class="flex flex-wrap gap-2 mt-4">
+                <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">AutoCAD</span>
+                <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">SolidWorks</span>
+                <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">GD&T</span>
+            </div>
+            <p class="text-xs text-secondary mt-4 font-medium flex items-center gap-1"><i class="fa-solid fa-up-right-and-down-left-from-center text-xs"></i> Click to view details</p>
+        </div>
+
+        <!-- AUTOMOBILE AIR FILTER -->
+        <div class="project-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col"
+            onclick="openModal({
+                title: 'Automobile Air Filter – CAD Drawing',
+                year: '2024',
+                media: { type: 'placeholder', icon: 'fa-wind', label: 'Add your AutoCAD drawing image here — replace src in media object' },
+                tags: ['AutoCAD','GD&T','Engineering Drawing','Dimensioning','2D Drafting','Manufacturing'],
+                desc: 'Accurate 2D drafting and 3D modelling of an automobile air filter using AutoCAD. Full GD&T annotations, proper dimensioning, and a complete drawing package suitable for manufacturing reference.',
+                bullets: [
+                    'Produced multi-view 2D drawing of the air filter with precise dimensioning',
+                    'Applied GD&T annotations following engineering drawing standards',
+                    'Generated a complete drawing package suitable for manufacturing reference and design review',
+                    'Part of AutoCAD with Basic 3D Modeling certification at UET Lahore'
+                ]
+            })">
+            <div class="flex items-start justify-between mb-3">
+                <h3 class="text-lg font-bold text-primary flex items-center gap-2">
+                    <i class="fa-solid fa-wind text-secondary"></i> Automobile Air Filter
+                </h3>
+                <span class="bg-zinc-100 text-xs font-semibold px-3 py-1 rounded-full text-primary shrink-0 ml-2">2024</span>
+            </div>
+            <p class="text-gray-600 text-sm flex-1">2D drafting & 3D modelling of an automobile air filter with full GD&T annotations and engineering drawing standards.</p>
+            <div class="flex flex-wrap gap-2 mt-4">
+                <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">AutoCAD</span>
+                <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">GD&T</span>
+                <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Engineering Drawing</span>
+            </div>
+            <p class="text-xs text-secondary mt-4 font-medium flex items-center gap-1"><i class="fa-solid fa-up-right-and-down-left-from-center text-xs"></i> Click to view details</p>
+        </div>
+
+        <!--
+        ╔══════════════════════════════════════════════════════════════╗
+        ║  TEMPLATE — CAD PROJECT                                     ║
+        ║  For media you can use:                                     ║
+        ║    youtube  →  { type:'youtube', id:'VIDEO_ID' }            ║
+        ║    image    →  { type:'image', src:'file.jpg', alt:'...' }  ║
+        ║    none     →  { type:'placeholder', icon:'fa-cube',        ║
+        ║                   label:'Photo coming soon' }               ║
+        ╚══════════════════════════════════════════════════════════════╝
+
+        <div class="project-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col"
+            onclick="openModal({
+                title: 'YOUR CAD PROJECT',
+                year: 'YEAR',
+                media: { type: 'image', src: 'your-drawing.jpg', alt: 'CAD Drawing' },
+                tags: ['AutoCAD','SolidWorks','3D Modelling'],
+                desc: 'Description of the CAD design work done.',
+                bullets: [
+                    'What you designed',
+                    'Standards or techniques applied',
+                    'Outcome or use of the drawing'
+                ],
+                link: { url: 'your-page.html', label: 'View Drawing', icon: 'fa-solid fa-compass-drafting' }
+            })">
+            <div class="flex items-start justify-between mb-3">
+                <h3 class="text-lg font-bold text-primary flex items-center gap-2">
+                    <i class="fa-solid fa-cube text-secondary"></i> YOUR CAD PROJECT
+                </h3>
+                <span class="bg-zinc-100 text-xs font-semibold px-3 py-1 rounded-full text-primary shrink-0 ml-2">YEAR</span>
+            </div>
+            <p class="text-gray-600 text-sm flex-1">Short card summary.</p>
+            <div class="flex flex-wrap gap-2 mt-4">
+                <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">AutoCAD</span>
+            </div>
+            <p class="text-xs text-secondary mt-4 font-medium flex items-center gap-1"><i class="fa-solid fa-up-right-and-down-left-from-center text-xs"></i> Click to view details</p>
+        </div>
+        -->
+
+    </div>
+
+    <!-- bottom CTA -->
+    <div class="mt-16 text-center bg-zinc-50 p-8 rounded-3xl max-w-3xl mx-auto" data-aos="fade-up">
+        <i class="fa-solid fa-code-branch text-4xl text-primary mb-3"></i>
+        <h3 class="text-2xl font-semibold text-primary">more projects on the way</h3>
+        <p class="text-gray-600 mt-2">Continuously building — mechanical, embedded, and analysis projects. Grid updates as new work ships.</p>
+        <a href="skills.html" class="inline-block mt-5 bg-primary text-white px-6 py-3 rounded-xl hover:bg-[#1e2c5a] transition-all duration-300 shadow-md hover:shadow-lg">
+            <i class="fa-solid fa-arrow-right mr-2"></i> View skills behind these projects
+        </a>
+    </div>
+
+</main>
+
+<!-- ========== SCRIPTS ========== -->
+<!-- Typing effect -->
+<script>
+(function() {
+    const lines = ['embedded · mechanical · analysis','Arduino · ESP32 · AutoCAD · Python','CAD models & engineering prototypes','from concept to working system'];
+    let i = 0, c = 0, del = false;
+    const el = document.getElementById('projects-typing');
+    if (!el) return;
+    function type() {
+        const cur = lines[i];
+        if (del) { c--; el.textContent = cur.substring(0,c); if(c===0){del=false;i=(i+1)%lines.length;setTimeout(type,500);}else setTimeout(type,50); }
+        else { c++; el.textContent = cur.substring(0,c); if(c===cur.length){del=true;setTimeout(type,1500);}else setTimeout(type,100); }
+    }
+    document.readyState==='loading' ? document.addEventListener('DOMContentLoaded',type) : type();
+})();
+</script>
+
+<!-- Modal logic -->
+<script>
+function openModal(data) {
+    // media
+    const mediaEl = document.getElementById('modal-media');
+    if (data.media.type === 'youtube') {
+        mediaEl.innerHTML = `<iframe src="https://www.youtube.com/embed/${data.media.id}" title="${data.title}" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
+    } else if (data.media.type === 'image') {
+        mediaEl.innerHTML = `<img src="${data.media.src}" alt="${data.media.alt || data.title}">`;
+    } else {
+        mediaEl.innerHTML = `<div class="flex flex-col items-center gap-3 text-gray-400"><i class="fa-solid ${data.media.icon} text-4xl opacity-30"></i><span class="text-sm">${data.media.label}</span></div>`;
+    }
+    // title
+    document.getElementById('modal-title').textContent = data.title;
+    // tags
+    document.getElementById('modal-tags').innerHTML = data.tags.map(t =>
+        `<span class="modal-tag">${t}</span>`).join('');
+    // desc
+    document.getElementById('modal-desc').textContent = data.desc;
+    // bullets
+    document.getElementById('modal-bullets').innerHTML = data.bullets.map(b =>
+        `<li class="flex items-start gap-2 text-gray-600 text-sm"><i class="fa-solid fa-circle-dot text-secondary mt-1 text-xs shrink-0"></i><span>${b}</span></li>`
+    ).join('');
+    // link
+    const linkEl = document.getElementById('modal-link');
+    if (data.link) {
+        linkEl.innerHTML = `<a href="${data.link.url}" ${data.link.url.startsWith('http') ? 'target="_blank"' : ''} class="inline-flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1e2c5a] transition-all"><i class="${data.link.icon}"></i> ${data.link.label}</a>`;
+    } else { linkEl.innerHTML = ''; }
+
+    document.getElementById('modal-overlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModalDirect() {
+    document.getElementById('modal-overlay').classList.remove('active');
+    document.body.style.overflow = '';
+    // stop video if youtube
+    const mediaEl = document.getElementById('modal-media');
+    const iframe = mediaEl.querySelector('iframe');
+    if (iframe) iframe.src = iframe.src; // reloads, stops video
+}
+
+function closeModal(e) {
+    if (e.target === document.getElementById('modal-overlay')) closeModalDirect();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
+</script>
+
+<!-- Mobile menu -->
+<script>
+const menuBtn = document.getElementById('menu-btn');
+const navMenu = document.getElementById('nav-menu');
+if (menuBtn && navMenu) menuBtn.addEventListener('click', () => navMenu.classList.toggle('hidden'));
+</script>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init({ duration: 800, once: false });</script>
+<script>
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+</script>
 
 </body>
 </html>

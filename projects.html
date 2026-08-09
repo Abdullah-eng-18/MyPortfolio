@@ -172,6 +172,38 @@
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8" data-aos="fade-up" data-aos-delay="80">
 
+        <!-- HYDROPONIC ROOM MONITORING & CONTROL SYSTEM -->
+        <div class="project-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col"
+            onclick="openModal({
+                title: 'Hydroponic Room Monitoring & Control System',
+                year: '2026',
+                media: { type: 'placeholder', icon: 'fa-seedling', label: 'Add your project photo or dashboard screenshot here' },
+                tags: ['Dual ESP32','Firebase Realtime DB','IoT','Sensor Integration','Automation','Data Logging'],
+                desc: 'A dual-ESP32 based IoT system for automated hydroponic grow-room monitoring and control. Combines real-time sensor data acquisition, cloud and local data logging, and relay-driven automation with a live web dashboard.',
+                bullets: [
+                    'Designed a dual-ESP32 architecture separating sensor acquisition from relay-based actuator control',
+                    'Interfaced pH, TDS, temperature, humidity, and water-level sensors for real-time environmental monitoring',
+                    'Integrated Firebase Realtime Database with SD-card logging for redundant, real-time data storage',
+                    'Implemented relay-based control of pumps, fans, and RTC-scheduled grow lights, plus a web dashboard for live monitoring',
+                    'Iteratively debugged firmware across multiple versions, resolving state-machine, scheduling, and sensor calibration issues'
+                ],
+                link: { url: 'https://thermodynamics-lab.web.app', label: 'View Live Dashboard', icon: 'fa-solid fa-globe' }
+            })">
+            <div class="flex items-start justify-between mb-3">
+                <h3 class="text-lg font-bold text-primary flex items-center gap-2">
+                    <i class="fa-solid fa-seedling text-secondary"></i> Hydroponic Monitoring System
+                </h3>
+                <span class="bg-zinc-100 text-xs font-semibold px-3 py-1 rounded-full text-primary shrink-0 ml-2">2026</span>
+            </div>
+            <p class="text-gray-600 text-sm flex-1">Dual-ESP32 IoT system for automated hydroponic grow-room monitoring — sensors, Firebase logging, relay automation, and a live web dashboard.</p>
+            <div class="flex flex-wrap gap-2 mt-4">
+                <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">ESP32</span>
+                <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Firebase</span>
+                <span class="project-tech-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">IoT</span>
+            </div>
+            <p class="text-xs text-secondary mt-4 font-medium flex items-center gap-1"><i class="fa-solid fa-up-right-and-down-left-from-center text-xs"></i> Click to view details</p>
+        </div>
+
         <!-- ESP32 VISCOMETER -->
         <div class="project-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col"
             onclick="openModal({
@@ -472,7 +504,7 @@
 <!-- Typing effect -->
 <script>
 (function() {
-    const lines = ['embedded · mechanical · analysis','Arduino · ESP32 · AutoCAD · Python','CAD models & engineering prototypes','from concept to working system'];
+    const lines = ['embedded · mechanical · analysis','Arduino · ESP32 · AutoCAD · Python','IoT hydroponics · Firebase · sensors','CAD models & engineering prototypes','from concept to working system'];
     let i = 0, c = 0, del = false;
     const el = document.getElementById('projects-typing');
     if (!el) return;
@@ -549,4 +581,4 @@ window.scrollTo(0, 0);
 </script>
 
 </body>
-</html>
+</html>

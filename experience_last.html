@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/e42d2ab83e.js" crossorigin="anonymous"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Experience – Abdullah Saif</title>
+    <style>
+        .bg-primary  { background-color: #14213d; }
+        .text-primary { color: #14213d; }
+        .text-accent  { color: #29447d; }
+        .text-secondary { color: #7582C1; }
+        .hover-text-secondary:hover { color: #40455c; }
+
+        .blinking-cursor { animation: blink 1s step-start infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        @keyframes slow-spin { to { transform: rotate(360deg); } }
+        @keyframes fast-spin { to { transform: rotate(360deg); } }
+        .slow-spin { animation: slow-spin 6s linear infinite; }
+        .group:hover .hover-spin {
+            animation: fast-spin 1s linear infinite !important;
+            transform: scale(1.25); color: #021338;
+        }
+        .no-shadow-on-hover:hover { box-shadow: none !important; transform: scale(1.05) !important; }
+
+        .exp-card {
+            transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s;
+        }
+        .exp-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px 0 rgba(41,68,125,0.15);
+        }
+        .exp-tag { transition: all 0.2s ease; }
+        .exp-tag:hover { background-color: #29447d; color: #e5e5e5; transform: scale(1.05); }
+
+        /* section divider */
+        .exp-section {
+            border-left: 6px solid #7582C1;
+            padding-left: 1rem;
+            margin: 2.5rem 0 1.5rem;
+        }
+
+        /* timeline dot for vertical list */
+        .timeline-dot {
+            width: 14px; height: 14px;
+            background: #7582C1;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            box-shadow: 0 0 0 2px #7582C1;
+            flex-shrink: 0;
+            margin-top: 6px;
+        }
+
+        .hidden { display: none !important; }
+        @media (min-width: 1024px) { .hidden { display: flex !important; } }
+    </style>
+</head>
+<body class="font-[Poppins] scroll-smooth antialiased">
+
+<!-- ========== HEADER – exact from index.html ========== -->
+<header class="fixed z-50 bg-gradient-to-b from-zinc-300 to-white w-full shadow-sm">
+    <nav class="flex justify-between items-center px-4 lg:px-6">
+        <a href="index.html">
+            <h2 class="group no-shadow-on-hover py-4 text-primary font-bold text-xl uppercase hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                <i class="fas fa-cog text-primary slow-spin hover-spin transition-all duration-300"></i>
+                Engg. Abdullah Saif
+            </h2>
+        </a>
+        <button id="menu-btn" class="lg:hidden text-primary text-2xl focus:outline-none pr-2">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul id="nav-menu" class="hidden lg:flex flex-col lg:flex-row gap-4 lg:gap-5 p-4 lg:p-0 items-start lg:items-center text-primary font-semibold tracking-wider absolute lg:static top-full left-0 w-full lg:w-auto bg-white lg:bg-transparent shadow-md lg:shadow-none z-40 transition-all duration-300">
+            <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl flex items-center gap-2" href="index.html"><i class="fa-solid fa-house-user"></i> HOME</a></li>
+            <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl flex items-center gap-2" href="projects.html"><i class="fa-solid fa-gears"></i> PROJECTS</a></li>
+            <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl flex items-center gap-2" href="skills.html"><i class="fa-solid fa-screwdriver-wrench"></i> SKILLS</a></li>
+            <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl flex items-center gap-2" href="experience.html"><i class="fa-solid fa-person-walking-luggage"></i> EXPERIENCE</a></li>
+            <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl flex items-center gap-2" href="Abdullah_Saif_Resume.pdf" target="_blank"><i class="fa-solid fa-file"></i> RESUME</a></li>
+            <li><a class="nav-link hover-text-secondary hover:scale-110 text-sm hover:bg-zinc-200 p-2 rounded-xl flex items-center gap-2" href="contact.html"><i class="fa-solid fa-address-book"></i> CONTACT</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- ========== MAIN ========== -->
+<main class="pt-32 pb-16 px-4 md:px-8 max-w-5xl mx-auto">
+
+    <!-- page heading -->
+    <div class="mb-10 text-center" data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 flex items-center justify-center gap-3 flex-wrap">
+            <i class="fa-solid fa-person-walking-luggage text-primary"></i>
+            <span>Experience & Education</span>
+        </h2>
+        <div class="text-accent mt-2 h-8 text-lg md:text-xl">
+            <span id="exp-typing"></span><span class="blinking-cursor text-primary">|</span>
+        </div>
+        <p class="text-gray-500 mt-3 max-w-xl mx-auto text-sm">certifications · coursework · what's next</p>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         SECTION: WORK EXPERIENCE
+         (empty for now — cards commented below)
+    ══════════════════════════════════════ -->
+    <div class="exp-section" data-aos="fade-right">
+        <h3 class="text-xl font-semibold text-primary flex items-center gap-3">
+            <i class="fa-solid fa-briefcase text-secondary"></i> Work Experience
+        </h3>
+    </div>
+
+    <!-- "not yet" honest card -->
+    <div class="exp-card bg-white rounded-2xl p-8 border border-dashed border-gray-300 shadow-sm text-center mb-6" data-aos="fade-up">
+        <div class="w-16 h-16 bg-zinc-100 rounded-2xl flex items-center justify-center text-3xl text-secondary mx-auto mb-4">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+        </div>
+        <h4 class="text-lg font-bold text-primary mb-2">Actively Seeking Internship</h4>
+        <p class="text-gray-500 text-sm max-w-lg mx-auto leading-relaxed">
+            Currently in 4th semester at UET Lahore. No formal work experience yet — but actively looking for internship opportunities in mechanical design, CAD drafting, embedded systems, or data analysis. Open to Summer 2025 positions.
+        </p>
+        <a href="Abdullah_Saif_Resume.pdf" target="_blank"
+            class="inline-flex items-center gap-2 mt-5 bg-primary text-white px-5 py-2.5 rounded-xl text-sm font-medium hover:bg-[#1e2c5a] transition-all shadow-md">
+            <i class="fa-solid fa-file"></i> View My Resume
+        </a>
+    </div>
+
+    <!--
+    ╔══════════════════════════════════════════════════════════════════╗
+    ║  TEMPLATE — WORK EXPERIENCE CARD                                ║
+    ║  When you land an internship or job, copy this, uncomment it,   ║
+    ║  fill in your details, and remove the "Actively Seeking" card   ║
+    ╚══════════════════════════════════════════════════════════════════╝
+
+    <div class="exp-card bg-white rounded-2xl p-6 md:p-8 border border-gray-200 shadow-sm flex flex-col md:flex-row md:items-start gap-5 mb-6" data-aos="fade-up">
+        <div class="md:w-20 flex-shrink-0 flex md:justify-center">
+            <div class="w-16 h-16 bg-zinc-100 rounded-2xl flex items-center justify-center text-3xl text-primary">
+                <i class="fa-solid fa-building"></i>
+            </div>
+        </div>
+        <div class="flex-1">
+            <div class="flex flex-wrap items-start justify-between gap-3">
+                <div>
+                    <h3 class="text-xl font-bold text-primary">YOUR JOB TITLE</h3>
+                    <p class="text-gray-600 font-medium">Company Name · City</p>
+                </div>
+                <span class="bg-zinc-100 text-primary px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap">
+                    <i class="fa-regular fa-calendar mr-1"></i> Mon YYYY – Mon YYYY
+                </span>
+            </div>
+            <p class="text-gray-600 mt-4 text-sm leading-relaxed">
+                2–3 sentence summary of what you did, what you worked on, and what you contributed.
+            </p>
+            <ul class="mt-3 space-y-1.5">
+                <li class="flex items-start gap-2 text-gray-600 text-sm"><i class="fa-solid fa-circle-dot text-secondary mt-1 text-xs shrink-0"></i><span>Key responsibility or achievement 1</span></li>
+                <li class="flex items-start gap-2 text-gray-600 text-sm"><i class="fa-solid fa-circle-dot text-secondary mt-1 text-xs shrink-0"></i><span>Key responsibility or achievement 2</span></li>
+                <li class="flex items-start gap-2 text-gray-600 text-sm"><i class="fa-solid fa-circle-dot text-secondary mt-1 text-xs shrink-0"></i><span>Key responsibility or achievement 3</span></li>
+            </ul>
+            <div class="flex flex-wrap gap-2 mt-4">
+                <span class="exp-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Skill 1</span>
+                <span class="exp-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Skill 2</span>
+                <span class="exp-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Skill 3</span>
+            </div>
+            // Optional: link to certificate or company
+            // <a href="#" target="_blank" class="mt-4 inline-flex items-center gap-2 text-primary font-medium text-sm hover:text-[#29447d]">
+            //     <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i> View Certificate
+            // </a>
+        </div>
+    </div>
+    -->
+
+
+    <!-- ══════════════════════════════════════
+         SECTION: EDUCATION
+    ══════════════════════════════════════ -->
+    <div class="exp-section" data-aos="fade-right">
+        <h3 class="text-xl font-semibold text-primary flex items-center gap-3">
+            <i class="fa-solid fa-graduation-cap text-secondary"></i> Education
+        </h3>
+    </div>
+
+    <div class="grid grid-cols-1 gap-5">
+
+        <!-- UET Lahore -->
+        <div class="exp-card bg-white rounded-2xl p-6 md:p-8 border border-gray-200 shadow-sm flex flex-col md:flex-row md:items-start gap-5" data-aos="fade-up">
+            <div class="md:w-20 flex-shrink-0 flex md:justify-center">
+                <div class="w-16 h-16 bg-zinc-100 rounded-2xl flex items-center justify-center text-3xl text-primary">
+                    <i class="fa-solid fa-university"></i>
+                </div>
+            </div>
+            <div class="flex-1">
+                <div class="flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                        <h3 class="text-xl font-bold text-primary">BSc Mechanical Engineering</h3>
+                        <p class="text-gray-600 font-medium">University of Engineering & Technology (UET) · Lahore</p>
+                    </div>
+                    <span class="bg-zinc-100 text-primary px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap">
+                        <i class="fa-regular fa-calendar mr-1"></i> 2024 – 2028
+                    </span>
+                </div>
+                <div class="flex flex-wrap gap-4 mt-3">
+                    <span class="text-sm text-gray-600"><i class="fa-solid fa-star text-yellow-400 mr-1"></i> CGPA: <strong>3.22</strong></span>
+                    <span class="text-sm text-gray-600"><i class="fa-solid fa-layer-group text-secondary mr-1"></i> Semester: <strong>4th (Ongoing)</strong></span>
+                </div>
+                <p class="text-gray-500 text-sm mt-3 leading-relaxed">
+                    Relevant coursework: Fluid Mechanics, Thermodynamics, Mechanics of Materials, Engineering Mechanics, Machine Design, CAD, Engineering Programming, Engineering Drawing.
+                </p>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="exp-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Mechanical Design</span>
+                    <span class="exp-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Fluid Mechanics</span>
+                    <span class="exp-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Thermodynamics</span>
+                    <span class="exp-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">CAD</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- KIPS College FSc -->
+        <div class="exp-card bg-white rounded-2xl p-6 md:p-8 border border-gray-200 shadow-sm flex flex-col md:flex-row md:items-start gap-5" data-aos="fade-up" data-aos-delay="60">
+            <div class="md:w-20 flex-shrink-0 flex md:justify-center">
+                <div class="w-16 h-16 bg-zinc-100 rounded-2xl flex items-center justify-center text-3xl text-primary">
+                    <i class="fa-solid fa-school"></i>
+                </div>
+            </div>
+            <div class="flex-1">
+                <div class="flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                        <h3 class="text-xl font-bold text-primary">FSc Pre-Engineering</h3>
+                        <p class="text-gray-600 font-medium">KIPS College · Kasur</p>
+                    </div>
+                    <span class="bg-zinc-100 text-primary px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap">
+                        <i class="fa-regular fa-calendar mr-1"></i> 2022 – 2024
+                    </span>
+                </div>
+                <div class="flex flex-wrap gap-4 mt-3">
+                    <span class="text-sm text-gray-600"><i class="fa-solid fa-star text-yellow-400 mr-1"></i> Marks: <strong>85%</strong></span>
+                </div>
+                <p class="text-gray-500 text-sm mt-3">Strong foundation in Mathematics and Physics — direct preparation for engineering degree.</p>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <span class="exp-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Mathematics</span>
+                    <span class="exp-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Physics</span>
+                    <span class="exp-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Chemistry</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- ══════════════════════════════════════
+         SECTION: CERTIFICATIONS
+    ══════════════════════════════════════ -->
+    <div class="exp-section" data-aos="fade-right">
+        <h3 class="text-xl font-semibold text-primary flex items-center gap-3">
+            <i class="fa-solid fa-certificate text-secondary"></i> Certifications
+        </h3>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+        <!-- AutoCAD Cert -->
+        <div class="exp-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex items-start gap-4" data-aos="fade-up">
+            <div class="w-14 h-14 bg-zinc-100 rounded-xl flex items-center justify-center text-2xl text-primary shrink-0">
+                <i class="fa-solid fa-drafting-compass"></i>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold text-primary">AutoCAD with Basic 3D Modeling</h4>
+                <p class="text-gray-600 text-sm font-medium mt-0.5">UET Lahore</p>
+                <span class="inline-block mt-2 bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">
+                    <i class="fa-regular fa-calendar mr-1"></i> Jan – Feb 2025
+                </span>
+                <p class="text-gray-500 text-sm mt-2 leading-relaxed">
+                    Professional certification covering 2D drafting, 3D modeling, GD&T, and engineering drawing standards for mechanical design and manufacturing.
+                </p>
+                <div class="flex flex-wrap gap-2 mt-3">
+                    <span class="exp-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">AutoCAD</span>
+                    <span class="exp-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">GD&T</span>
+                    <span class="exp-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">3D Modeling</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Google Python Cert -->
+        <div class="exp-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex items-start gap-4" data-aos="fade-up" data-aos-delay="60">
+            <div class="w-14 h-14 bg-zinc-100 rounded-xl flex items-center justify-center text-2xl text-primary shrink-0">
+                <i class="fa-brands fa-python"></i>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold text-primary">Python Programming Certificate</h4>
+                <p class="text-gray-600 text-sm font-medium mt-0.5">Google / Coursera</p>
+                <span class="inline-block mt-2 bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">
+                    <i class="fa-regular fa-calendar mr-1"></i> 2024
+                </span>
+                <p class="text-gray-500 text-sm mt-2 leading-relaxed">
+                    Google-certified course covering data structures, Python libraries (NumPy, Pandas), and applied programming for data analysis and automation.
+                </p>
+                <div class="flex flex-wrap gap-2 mt-3">
+                    <span class="exp-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Python</span>
+                    <span class="exp-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">NumPy</span>
+                    <span class="exp-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Pandas</span>
+                </div>
+            </div>
+        </div>
+
+        <!--
+        ╔══════════════════════════════════════════════════════════════╗
+        ║  TEMPLATE — CERTIFICATION CARD                              ║
+        ║  Copy, uncomment, and fill in when you earn a new cert      ║
+        ╚══════════════════════════════════════════════════════════════╝
+
+        <div class="exp-card bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex items-start gap-4" data-aos="fade-up">
+            <div class="w-14 h-14 bg-zinc-100 rounded-xl flex items-center justify-center text-2xl text-primary shrink-0">
+                <i class="fa-solid fa-certificate"></i>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold text-primary">CERTIFICATION NAME</h4>
+                <p class="text-gray-600 text-sm font-medium mt-0.5">Issuing Organization</p>
+                <span class="inline-block mt-2 bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">
+                    <i class="fa-regular fa-calendar mr-1"></i> Mon YYYY
+                </span>
+                <p class="text-gray-500 text-sm mt-2 leading-relaxed">Short description of what it covered.</p>
+                <div class="flex flex-wrap gap-2 mt-3">
+                    <span class="exp-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Tag 1</span>
+                    <span class="exp-tag bg-zinc-100 text-primary px-3 py-1 rounded-full text-xs font-medium">Tag 2</span>
+                </div>
+                // Optional certificate link:
+                // <a href="#" target="_blank" class="mt-3 inline-flex items-center gap-2 text-primary font-medium text-sm hover:text-[#29447d]">
+                //     <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i> View Certificate
+                // </a>
+            </div>
+        </div>
+        -->
+
+    </div>
+
+
+    <!-- ══════════════════════════════════════
+         SECTION: WHAT I'M WORKING TOWARDS
+    ══════════════════════════════════════ -->
+    <div class="exp-section" data-aos="fade-right">
+        <h3 class="text-xl font-semibold text-primary flex items-center gap-3">
+            <i class="fa-solid fa-rocket text-secondary"></i> What I'm Working Towards
+        </h3>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6" data-aos="fade-up">
+
+        <div class="bg-white rounded-2xl p-5 border border-gray-200 shadow-sm text-center">
+            <div class="w-12 h-12 bg-zinc-100 rounded-xl flex items-center justify-center text-2xl text-primary mx-auto mb-3">
+                <i class="fa-solid fa-briefcase"></i>
+            </div>
+            <h4 class="font-bold text-primary text-sm">Summer Internship 2025</h4>
+            <p class="text-gray-500 text-xs mt-1 leading-relaxed">Targeting roles in mechanical design, CAD drafting, or embedded systems. Open to positions in Lahore or remote.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-5 border border-gray-200 shadow-sm text-center">
+            <div class="w-12 h-12 bg-zinc-100 rounded-xl flex items-center justify-center text-2xl text-primary mx-auto mb-3">
+                <i class="fa-solid fa-flask-vial"></i>
+            </div>
+            <h4 class="font-bold text-primary text-sm">Semester Design Project (SDP)</h4>
+            <p class="text-gray-500 text-xs mt-1 leading-relaxed">Planning a practical engineering SDP that applies CAD, embedded systems, and mechanical analysis skills together.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-5 border border-gray-200 shadow-sm text-center">
+            <div class="w-12 h-12 bg-zinc-100 rounded-xl flex items-center justify-center text-2xl text-primary mx-auto mb-3">
+                <i class="fa-solid fa-laptop-code"></i>
+            </div>
+            <h4 class="font-bold text-primary text-sm">Freelancing</h4>
+            <p class="text-gray-500 text-xs mt-1 leading-relaxed">Looking to take on freelance work in CAD drafting, 3D modelling, AutoCAD drawings, and embedded systems projects.</p>
+        </div>
+
+    </div>
+
+
+    <!-- bottom CTA -->
+    <div class="mt-14 text-center bg-zinc-50 p-8 rounded-3xl max-w-2xl mx-auto" data-aos="fade-up">
+        <i class="fa-solid fa-handshake text-4xl text-primary mb-3"></i>
+        <h3 class="text-2xl font-semibold text-primary">open to opportunities</h3>
+        <p class="text-gray-500 mt-2 text-sm max-w-md mx-auto">If you're looking for a motivated mechanical engineering student for an internship or part-time role — let's talk.</p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center mt-5">
+            <a href="contact.html"
+                class="inline-flex items-center justify-center gap-2 bg-primary text-white px-6 py-3 rounded-xl text-sm font-medium hover:bg-[#1e2c5a] transition-all shadow-md">
+                <i class="fa-solid fa-envelope"></i> Get in Touch
+            </a>
+            <a href="Abdullah_Saif_Resume.pdf" target="_blank"
+                class="inline-flex items-center justify-center gap-2 bg-zinc-200 text-primary px-6 py-3 rounded-xl text-sm font-medium hover:bg-zinc-300 transition-all">
+                <i class="fa-solid fa-file-pdf"></i> Download Resume
+            </a>
+        </div>
+    </div>
+
+</main>
+
+<!-- ========== SCRIPTS ========== -->
+<script>
+(function() {
+    const lines = [
+        'education · certifications · goals',
+        'UET Lahore · 4th Semester · CGPA 3.22',
+        'AutoCAD certified · Python certified',
+        'seeking Summer 2025 internship',
+        'mechanical design · embedded systems'
+    ];
+    let i = 0, c = 0, del = false;
+    const el = document.getElementById('exp-typing');
+    if (!el) return;
+    function type() {
+        const cur = lines[i];
+        if (del) {
+            c--; el.textContent = cur.substring(0,c);
+            if (c===0) { del=false; i=(i+1)%lines.length; setTimeout(type,500); }
+            else setTimeout(type,50);
+        } else {
+            c++; el.textContent = cur.substring(0,c);
+            if (c===cur.length) { del=true; setTimeout(type,1500); }
+            else setTimeout(type,100);
+        }
+    }
+    document.readyState==='loading' ? document.addEventListener('DOMContentLoaded',type) : type();
+})();
+</script>
+
+<script>
+const menuBtn = document.getElementById('menu-btn');
+const navMenu = document.getElementById('nav-menu');
+if (menuBtn && navMenu) menuBtn.addEventListener('click', () => navMenu.classList.toggle('hidden'));
+</script>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init({ duration: 800, once: false });</script>
+<script>
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+</script>
+
+</body>
+</html>
